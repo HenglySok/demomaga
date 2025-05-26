@@ -7,7 +7,7 @@ function Cart({ id, title, author, image, chapter, views }) {
             <div className="w-full relative h-full">
                 <img src={image} alt={`${title} thumbnail`} className="w-full h-full" />
                 <div className="absolute bottom-0 text-white w-full">
-                    <div className="bg-gradient-to-t from-black to-[#2D2C2C]">
+                    <div className="bg-gradient-to-t from-black to-#2D2C2C">
                         <div className="px-[5px] pt-[5px]">
                             <h3 className="text-text-100 text-[18px]">{title}</h3>
                             <p className="text-text-50 text-[12px]">{author}</p>
