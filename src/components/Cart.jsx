@@ -3,19 +3,19 @@ import cartList from "../services/cartList";
 
 function Cart({ id, title, author, image, chapter, views }) {
     return (
-        <article className="w-[183px] h-[260px] mx-auto">
+        <article className="w-[183px] h-[260px] mx-auto rounded-b-xl">
             <div className="w-full relative h-full">
-                <img src={image} alt={`${title} thumbnail`} className="w-full h-full" />
+                <img src={image} alt={`${title} thumbnail`} className="w-full h-full rounded-b-xl" />
                 <div className="absolute bottom-0 text-white w-full">
                     <div className="bg-gradient-to-t from-black to-#2D2C2C">
-                        <div className="px-[5px] pt-[5px]">
-                            <h3 className="text-text-100 text-[18px]">{title}</h3>
+                        <div className="px-[5px] pt-[5px] transition-all duration-300 ease-in-out hover:py-5 hover:scale-[1.02] hover:bg-muted/20 rounded-md cursor-pointer">
+                            <h3 className="text-text-100 text-[18px] group-hover:text-primary transition-colors duration-300">{title}</h3>
                             <p className="text-text-50 text-[12px]">{author}</p>
                         </div>
                     </div>
-                    <hr className="w-full text-text-50" />
-                    <div className="bg-black">
-                        <div className="px-[5px] py-[5px]">
+                    <div className="bg-black relative rounded-b-xl border-t-white border-t-1 transition-all duration-300 hover:bg-gradient-to-b from-black to-red-500 hover:border-red-500">
+
+                        <div className="px-[5px] py-[5px]  ">
                             <div className="flex justify-between items-center">
                                 <h3 className="text-text-100 text-[18px]">#{id}</h3>
                                 <div className="flex items-center justify-between text-text-50 text-[14px] gap-4">
