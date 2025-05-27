@@ -2,7 +2,7 @@ import React from 'react'
 
 function HottestCart() {
     return (
-        <article className='flex items-center justify-start gap-6 h-[166px] w-[457px] p-2 transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-black to-primary-100 to-30%' >
+        <article className='flex items-center justify-start gap-6 h-[166px] w-[457px] p-2 transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-black to-primary-75 to-40%' >
             <img
                 className='h-[141px] w-[103px]'
                 src="https://resizing.flixster.com/c2qMEiR98SgnSxxE0XwulbcsfLs=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p194893_b_v12_aa.jpg" alt="" />
