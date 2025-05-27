@@ -50,7 +50,19 @@ function Cart({ id, title, author, image, chapter, views }) {
 
 export function CartList() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className=" relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[33px] bg-black pt-20 px-5">
+            <div className="absolute top-0 left- ps-5 pt-2 flex justify-between items-center w-full">
+                <span className="text-text-100 0 text-[28px] ">Recently Update</span>
+                <span className="flex items-center justify-between  bg-secondary-100 rounded-s-[5px] transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[15px]">
+                    <button className="py-1 px-4 text-[18px] hover:">All Update</button>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16"
+                        fill="currentColor"
+                        class="bi bi-caret-right" viewBox="0 0 16 16">
+                        <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753" />
+                    </svg>
+                </span>
+            </div>
             {cartList.map(manga => (
                 <Cart
                     key={manga.id}
