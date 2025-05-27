@@ -7,11 +7,12 @@ function App() {
 
 
   return (
-    <section className='flex gap-2 w-[95%] mx-auto'>
-      <div className='flex gap-1 w-fit mx-auto'>
+    <section className='flex gap-[26px] w-[90%] mx-auto'>
+      <div className='flex justify-between gap-1 w-full mx-auto'>
         <CartList />
+        <HottestCartList />
       </div>
-      <HottestCartList />
+
     </section>
   )
 }
