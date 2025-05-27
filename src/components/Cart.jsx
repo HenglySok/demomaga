@@ -50,7 +50,7 @@ function Cart({ id, title, author, image, chapter, views }) {
 
 export function CartList() {
     return (
-        <div className=" relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[33px] bg-black pt-20 px-5">
+        <div className=" relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[33px] bg-gradient-to-b from-[#000000] to-[#252424] to-80% pt-20 px-5 w-[911px]">
             <div className="absolute top-0 left- ps-5 pt-2 flex justify-between items-center w-full">
                 <span className="text-text-100 0 text-[28px] ">Recently Update</span>
                 <span className="flex items-center justify-between pe-5 bg-secondary-100 rounded-s-[5px] transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[15px] hover:pe-10">

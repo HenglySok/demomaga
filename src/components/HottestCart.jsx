@@ -49,9 +49,6 @@ export function HottestCartList() {
                         </svg>
                     </span>
                 </span>
-
-
-
             </div>
 
             <div className='bg-primary-75'>
