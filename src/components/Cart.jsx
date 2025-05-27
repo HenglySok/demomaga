@@ -21,7 +21,7 @@ function Cart({ id, title, author, image, chapter, views }) {
                     </div>
                     <div className="bg-black relative rounded-b-xl border-t-white border-t-1 transition-all duration-300 ease-in-out hover:bg-gradient-to-b from-black to-primary-75 hover:border-primary-75">
 
-                        <div className="px-[5px] pb-[20px]  ">
+                        <div className="px-[5px] pb-[30px]  ">
                             <div className="flex justify-between items-center">
                                 <h3 className="text-text-100 text-[18px] font-bold">#{id}</h3>
                                 <div className="flex items-center justify-between text-text-50 text-[14px] gap-4">
@@ -53,8 +53,10 @@ export function CartList() {
         <div className=" relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[33px] bg-gradient-to-b from-[#000000] to-[#252424] to-80% pt-20 px-5 w-[911px]">
             <div className="absolute top-0 left- ps-5 pt-2 flex justify-between items-center w-full">
                 <span className="text-text-100 0 text-[28px] ">Recently Update</span>
-                <span className="flex items-center justify-between pe-5 bg-secondary-100 rounded-s-[5px] transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[15px] hover:pe-10">
-                    <button className="py-1 px-4 text-[18px] hover:">All Update</button>
+                <span className="flex items-center gap-3 justify-between px-5 py-2 bg-secondary-100 rounded-s-[5px] cursor-pointer transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[20px] hover:pe-10">
+                    <button className="cursor-pointer">
+                        All Update
+                    </button>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16"
                         fill="currentColor"
