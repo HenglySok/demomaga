@@ -1,18 +1,18 @@
 import './App.css'
 import Cart from './components/Cart'
 import { CartList } from './components/Cart'
-import HottestCart from './components/HottestCart'
+import HottestCart, { HottestCartList } from './components/HottestCart'
 
 function App() {
 
 
   return (
-    <>
+    <section className='flex gap-2'>
       <div className='flex gap-1 w-fit mx-auto'>
         <CartList />
       </div>
-      <HottestCart />
-    </>
+      <HottestCartList />
+    </section>
   )
 }
 

@@ -3,7 +3,7 @@ import cartList from "../services/cartList";
 
 function Cart({ id, title, author, image, chapter, views }) {
     return (
-        <article className="relative w-[183px] h-[260px] mx-auto rounded-b-xl overflow-hidden">
+        <article className="relative w-[193px] h-[276px] mx-auto rounded-b-xl overflow-hidden">
             <span className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold text-center rotate-[-45deg] origin-top-left z-10 shadow-md">
                 <span>UP</span>
             </span>
