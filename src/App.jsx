@@ -7,7 +7,7 @@ function App() {
 
 
   return (
-    <section className='flex gap-2'>
+    <section className='flex gap-2 w-[95%] mx-auto'>
       <div className='flex gap-1 w-fit mx-auto'>
         <CartList />
       </div>
