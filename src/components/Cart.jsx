@@ -3,17 +3,23 @@ import cartList from "../services/cartList";
 
 function Cart({ id, title, author, image, chapter, views }) {
     return (
-        <article className="w-[183px] h-[260px] mx-auto rounded-b-xl">
+        <article className="relative w-[183px] h-[260px] mx-auto rounded-b-xl overflow-hidden">
+            <span className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold text-center rotate-[-45deg] origin-top-left z-10 shadow-md">
+                <span>UP</span>
+            </span>
             <div className="w-full relative h-full">
                 <img src={image} alt={`${title} thumbnail`} className="w-full h-full rounded-b-xl" />
                 <div className="absolute bottom-0 text-white w-full">
                     <div className="bg-gradient-to-t from-black to-#2D2C2C">
-                        <div className="px-[5px] pt-[5px] transition-all duration-300 ease-in-out hover:py-5 hover:scale-[1.02] hover:bg-muted/20 rounded-md cursor-pointer">
-                            <h3 className="text-text-100 text-[18px] font-bold group-hover:text-primary transition-colors duration-300">{title}</h3>
+                        <div className="group px-[5px] pt-[5px] transition-all duration-300 ease-in-out hover:py-7 hover:scale-[1.02] hover:bg-muted rounded-md cursor-pointer">
+                            <h3 className="text-text-100 text-[18px] font-bold transition-colors duration-300 group-hover:text-yellow-400">
+                                {title}
+                            </h3>
                             <p className="text-text-50 text-[12px]">{author}</p>
                         </div>
+
                     </div>
-                    <div className="bg-black relative rounded-b-xl border-t-white border-t-1 transition-all duration-300 ease-in-out hover:bg-gradient-to-b from-black to-red-400 hover:border-red-400">
+                    <div className="bg-black relative rounded-b-xl border-t-white border-t-1 transition-all duration-300 ease-in-out hover:bg-gradient-to-b from-black to-primary-75 hover:border-primary-75">
 
                         <div className="px-[5px] pb-[20px]  ">
                             <div className="flex justify-between items-center">
@@ -44,7 +50,7 @@ function Cart({ id, title, author, image, chapter, views }) {
 
 export function CartList() {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {cartList.map(manga => (
                 <Cart
                     key={manga.id}
