@@ -2,8 +2,16 @@
 import cartList from "../services/cartList";
 
 function Cart({ id, title, author, image, chapter, views }) {
+    {
+        /*
+        sm: 206 / 294
+        md: 152 / 217
+        lg: 153 / 230
+        xxl: 188 / 275
+        */
+    }
     return (
-        <article className="relative w-[193px] h-[276px] mx-auto rounded-b-xl overflow-hidden cursor-pointer">
+        <article className="relative w-[206px] h-[294px] md:w-[152px] md:h-[217px] lg:w-[153px] lg:h-[230px] xl:w-[188px] xl:h-[275px] mx-auto rounded-b-xl overflow-hidden cursor-pointer">
             <span className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold text-center rotate-[-45deg] origin-top-left z-10 shadow-md">
                 <span>UP</span>
             </span>
@@ -50,8 +58,8 @@ function Cart({ id, title, author, image, chapter, views }) {
 
 export function CartList() {
     return (
-        <div className=" relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[33px] bg-gradient-to-b from-[#000000] to-[#252424] to-80% pt-20 px-5 w-[911px] h-fit">
-            <div className="absolute top-0 left- ps-5 pt-2 flex justify-between items-center w-full">
+        <div className="bg-gradient-to-b from-[#000000] to-[#252424] to-80% w-fit h-fit">
+            <div className="ps-5  flex justify-between items-center w-full pt-3 pb-10">
                 <span className="text-text-100 0 text-[28px] ">Recently Update</span>
                 <span className="flex items-center gap-3 justify-between px-5 py-2 bg-secondary-100 rounded-s-[5px] cursor-pointer transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[20px] hover:pe-10">
                     <button className="cursor-pointer">
@@ -65,17 +73,22 @@ export function CartList() {
                     </svg>
                 </span>
             </div>
-            {cartList.map(manga => (
-                <Cart
-                    key={manga.id}
-                    id={manga.id}
-                    title={manga.title}
-                    author={manga.author}
-                    image={manga.image}
-                    chapter={manga.chapter}
-                    views={manga.views}
-                />
-            ))}
+
+            <div className="
+            
+            relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5">
+                {cartList.map(manga => (
+                    <Cart
+                        key={manga.id}
+                        id={manga.id}
+                        title={manga.title}
+                        author={manga.author}
+                        image={manga.image}
+                        chapter={manga.chapter}
+                        views={manga.views}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

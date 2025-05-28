@@ -33,7 +33,7 @@ function HottestCart({ title, author, image, rateing }) {
 export function HottestCartList() {
     return (
         <div className="w-[503px] bg-gradient-to-t from-black to-primary-75 h-fit pb-[200px]">
-            <span className="flex gap-3 items-center bg-primary-100 ps-5 py-5 justify-between">
+            <span className="w-full flex gap-3 items-center bg-primary-100 ps-5 py-5 justify-between">
                 <div className="flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="24"
