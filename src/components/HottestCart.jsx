@@ -2,7 +2,9 @@
 import hottestList from "../services/HottestList";
 function HottestCart({ title, author, image, rateing }) {
     return (
-        <article className='flex items-center justify-start ps-4 gap-6 h-[166px] w-[457px] p-2 transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-black to-primary-75 to-40% ' >
+        <article className='flex items-center justify-start gap-6
+        ps-4 p-2  h-[166px] w-[457px] cursor-pointer
+        transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-black to-primary-75 to-40% ' >
             <img
                 className='h-[141px] w-[103px]'
                 src={image} alt="" />
@@ -68,9 +70,10 @@ export function HottestCartList() {
                 <div className="border-[2px] border-primary-100 rounded-[11px] w-[253px] py-1
                 flex items-center justify-center text-primary-100 font-bold
                 transition-all  duration-300 ease-in-out
-                hover:border-secondary-100 hover:text-secondary-100 hover:w-[330px]">
+                hover:border-secondary-100 hover:text-secondary-100 hover:w-[330px]
+                cursor-pointer">
                     <button
-                        className="text-[16px]">
+                        className="text-[16px] cursor-pointer">
                         VIEW ALL
                     </button>
                     <svg xmlns="http://www.w3.org/2000/svg"
