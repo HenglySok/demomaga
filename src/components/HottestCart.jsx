@@ -3,7 +3,7 @@ import hottestList from "../services/HottestList";
 function HottestCart({ title, author, image, rateing }) {
     return (
         <article className='flex items-center justify-start gap-6
-        ps-4 p-2  h-[166px] w-[457px] cursor-pointer
+        ps-4 p-2  h-[166px] w-full cursor-pointer
         transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-black to-primary-75 to-40% ' >
             <img
                 className='h-[141px] w-[103px]'
