@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import hottestList from "../services/HottestList";
+import bg_manag from "../assets/img/bg_manga.jpg"
+
+
 function HottestCart({ title, author, image, rateing }) {
     return (
         <article className='flex items-center justify-start gap-6
@@ -30,9 +33,6 @@ function HottestCart({ title, author, image, rateing }) {
 }
 
 
-// Assuming hottestList and HottestCart are imported above this
-// import { hottestList } from "your-data-source";
-// import HottestCart from "./HottestCart";
 
 export function HottestCartList() {
     const [isOn, setIsOn] = useState(true);
@@ -54,7 +54,7 @@ export function HottestCartList() {
 
 
     return (
-        <div className="flex">
+        <div className="flex relative">
             {/* Floating Toggle Button (only visible on mobile) */}
             <button
                 onClick={() => setIsOn(!isOn)}
@@ -73,8 +73,26 @@ export function HottestCartList() {
             <div
                 className={`w-[80%] mx-auto md:w-full bg-gradient-to-t from-black to-primary-75 h-fit pb-[200px] z-20
                                         ${isOn ? "block" : "hidden"} md:block
-                                        fixed top-5 md:static transition-all duration-700 ease-in`}
+                                        fixed top-5 md:sticky md:top-0 transition-all duration-700 ease-in`}
             >
+                {/*Socal Banner */}
+                <div className="hidden md:flex justify-between items-center p-5 text-text-100 text-[14px] bg-[#363A4C]">
+                    <h4>Discord</h4>
+                    <h4>X</h4>
+                    <h4>Facebook</h4>
+                </div>
+
+                {/*Logo banner */}
+                <div className="hidden md:flex relative justify-center items-center">
+                    <img src={bg_manag} alt="manga pic" />
+                    <span className="bg-primary-100 px-20 py-3 absolute text-text-100 text-[32px]">Logo</span>
+                </div>
+
+                {/*black space*/}
+                <div className="bg-black w-full h-[277px]">
+
+                </div>
+
                 {/* Header */}
                 <div className="w-full flex justify-between items-center gap-3 bg-primary-100 ps-5 py-5">
                     <div className="flex items-center gap-3">
@@ -93,13 +111,12 @@ export function HottestCartList() {
                                      transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[20px] hover:pe-10"
                     >
                         <button className="text-sm font-semibold">ALL VIEW</button>
-                        <svg xmlns="http://www.w3.org/2000/svg"
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor"
-                            className="bi bi-caret-right"
-                            viewBox="0 0 16 16"
+                            class="bi bi-caret-right" viewBox="0 0 16 16"
                         >
-                            <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15" />
-
+                            <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753"></path>
                         </svg>
                     </span>
                 </div>
