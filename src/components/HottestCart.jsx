@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import hottestList from "../services/HottestList";
 import bg_manag from "../assets/img/bg_manga.jpg"
-import SocialMediaBanner from "./SocialMediaBanner";
+
 
 
 function HottestCart({ title, author, image, rateing }) {

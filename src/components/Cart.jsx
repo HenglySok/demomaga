@@ -58,7 +58,7 @@ function Cart({ id, title, author, image, chapter, views }) {
 
 export function CartList() {
     return (
-        <div className="bg-gradient-to-b from-[#000000] to-[#252424] to-80% w-full md:w-fit h-fit mx-auto">
+        <div className="bg-gradient-to-b from-[#000000] to-[#252424] to-80% w-full md:w-fit h-fit mx-auto rounded-[10px]">
             <div className="ps-5  flex justify-between items-center w-full pt-3 pb-10">
                 <span className="text-text-100 0 text-[28px] ">Recently Update</span>
                 <span className="flex items-center gap-3 justify-between px-5 py-2 bg-secondary-100 rounded-s-[5px] cursor-pointer transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[20px] hover:pe-10">
