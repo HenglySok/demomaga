@@ -2,6 +2,8 @@ import './App.css'
 import { Banner } from './components/Banner'
 import { CartList } from './components/Cart'
 import { HottestCartList } from './components/HottestCart'
+import SocialMediaBanner from './components/SocialMediaBanner'
+
 
 
 function App() {
@@ -15,7 +17,12 @@ function App() {
           <div className="col-span-2">
             <CartList />
           </div>
-          <HottestCartList />
+          <div className='flex flex-col gap-3'>
+            {/*socal media banner*/}
+            <SocialMediaBanner />
+            <HottestCartList />
+          </div>
+
         </div>
       </div>
     </section>
