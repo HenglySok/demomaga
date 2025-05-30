@@ -73,7 +73,7 @@ export function HottestCartList() {
             <div
                 className={`w-[80%] mx-auto md:w-full bg-gradient-to-t from-black to-primary-75 h-fit pb-[200px] z-20
                                         ${isOn ? "block" : "hidden"} md:block
-                                        fixed top-5 md:sticky md:top-0 transition-all duration-700 ease-in`}
+                                        fixed top-5 md:static transition-all duration-700 ease-in`}
             >
                 {/*Socal Banner */}
                 <div className="hidden md:flex justify-between items-center p-5 text-text-100 text-[14px] bg-[#363A4C]">
@@ -89,7 +89,7 @@ export function HottestCartList() {
                 </div>
 
                 {/*black space*/}
-                <div className="bg-black w-full h-[277px]">
+                <div className="hidden md:block bg-black w-full h-[277px]">
 
                 </div>
 

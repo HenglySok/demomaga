@@ -8,7 +8,7 @@ export const Banner = () => {
         <div className="pb-15 px-10 pt-8 bg-gradient-to-t from-bg-black to-[#00000075]
         relative"
         >
-            <div className="flex justify-between items-center w-full mx-auto">
+            <div className="flex justify-between items-center w-full mx-auto  scroll-auto overflow-auto">
                 <img src={banner1}
                     className='w-[435px] h-[230px]'
                     alt="" />
