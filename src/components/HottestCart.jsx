@@ -74,9 +74,9 @@ export function HottestCartList() {
 
             {/* Panel List */}
             <div
-                className={`w-[80%] mx-auto md:w-full bg-gradient-to-t from-black to-primary-75 h-fit pb-[200px] z-20
+                className={`w-[80%] h-full md:h-fit overflow-y-scroll  mx-auto md:w-full bg-gradient-to-t from-black to-primary-75  pb-[200px] z-20
                                         ${isOn ? "block" : "hidden"} md:block  rounded-t-[10px]
-                                        fixed top-5 md:static transition-all duration-700 ease-in`}
+                                        fixed top-0 left-0 md:static transition-all duration-700 ease-in`}
             >
 
                 {/*Logo banner */}
