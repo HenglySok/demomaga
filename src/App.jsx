@@ -4,6 +4,7 @@ import { CartList } from './components/Cart'
 import { HottestCartList } from './components/HottestCart'
 import NavBar from './components/NavBar'
 import SocialMediaBanner from './components/SocialMediaBanner'
+import Test from './components/Test'
 
 
 
@@ -39,6 +40,7 @@ function App() {
         </div>
 
       </div>
+
     </section>
   )
 }

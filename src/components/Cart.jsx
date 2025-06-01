@@ -25,7 +25,6 @@ function Cart({ id, title, author, image, chapter, views }) {
                             </h3>
                             <p className="text-text-50 text-[12px]">{author}</p>
                         </div>
-
                     </div>
                     <div className="bg-black relative rounded-b-xl border-t-white border-t-1 transition-all duration-300 ease-in-out hover:bg-gradient-to-b from-black to-primary-75 hover:border-primary-75">
 
@@ -68,15 +67,13 @@ export function CartList() {
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16"
                         fill="currentColor"
-                        class="bi bi-caret-right" viewBox="0 0 16 16">
+                        className="bi bi-caret-right" viewBox="0 0 16 16">
                         <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753" />
                     </svg>
                 </span>
             </div>
 
-            <div className="
-            
-            relative grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5">
+            <div className="relative grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5">
                 {cartList.map(manga => (
                     <Cart
                         key={manga.id}
