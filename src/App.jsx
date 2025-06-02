@@ -1,6 +1,7 @@
 import './App.css'
 import { Banner } from './components/Banner'
 import { CartList } from './components/Cart'
+import Footer from './components/Footer/Footer'
 import { HottestCartList } from './components/HottestCart'
 import NavBar from './components/NavBar/NavBar'
 import SocialMediaBanner from './components/SocialMediaBanner'
@@ -28,19 +29,19 @@ function App() {
       <Banner />
       <div className='w-[90%] mx-auto'>
 
-        <div className='flex md:justify-center lg:justify-center md:gap-3 w-full'>
+        <div className='flex md:justify-center lg:justify-center md:gap-3 w-full mb-5'>
           <div className='w-ful'>
             <CartList />
           </div>
           <div className='max-w-[350px] flex flex-col gap-5'>
-            <SocialMediaBanner />
+            <span className='bg-[#363A4C] w-fit  rounded-[10px]' ><SocialMediaBanner /></span>
             <HottestCartList />
           </div>
 
         </div>
 
       </div>
-
+      <Footer />
     </section>
   )
 }

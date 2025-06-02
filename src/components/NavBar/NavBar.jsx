@@ -11,10 +11,10 @@ const NavBar = () => {
     const [isMenuMobileON, setIsMenuMobileON] = useState(false);
 
     return (
-        <nav className="flex items-center justify-between px-6 py-4 shadow md:overflow-hidden relative w-full z-30">
+        <nav className="flex items-center justify-between px-6 py-4 shadow lg:overflow-hidden relative w-full z-30">
             <button
                 onClick={() => setIsMenuMobileON(!isMenuMobileON)}
-                className="flex md:hidden"
+                className="flex lg:hidden"
             >
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="70" height="70" fill="currentColor"
@@ -24,8 +24,8 @@ const NavBar = () => {
                 </svg>
             </button>
 
-            <div className="absolute top-25 left-3 bg-primary-100 w-[200px] overflow-hidden rounded-md z-50 transition-all duration-500 ">
-                <ul className={`flex flex-col md:hidden text-[16px] text-text-100 justify-start items-start 
+            <div className="absolute top-25 left-3 bg-primary-100 w-[200px]  rounded  z-100 transition-all duration-500 overflow-hidden">
+                <ul className={`flex flex-col lg:hidden text-[16px] text-text-100 justify-start items-start 
                  rounded-[5px]
                     overflow-hidden  transition-[max-height,opacity] 
                     duration-500 ease-in-out ${isMenuMobileON ? "p-2" : "p-0"}
@@ -34,7 +34,8 @@ const NavBar = () => {
                 </ul>
 
             </div>
-            <ul className="w-full h-full absolute top-0 right-0 z-[-1] flex justify-between overflow-hidden ">
+
+            <ul className="w-full h-full absolute top-0 right-0 z-[-1] flex justify-between overflow-hidden">
                 {
                     bgList.map((bg) => (
                         <img
@@ -43,19 +44,21 @@ const NavBar = () => {
                     ))
                 }
             </ul>
+
+
             {/* Logo */}
-            <div className="flex justify-center items-center gap-20 overflow-hidden">
-                <div className="w-[100px] h-[100px] bg-primary-100 flex items-center justify-center">
+            <div className="flex justify-center items-center gap-10 ">
+                <div className="w-[100px] h-[100px] bg-primary-100 flex items-center justify-center flex-nowrap ">
                     {/* Replace with actual logo SVG or img */}
                     <span className="text-xl font-bold">Logo</span>
                 </div>
 
                 {/* Menu List */}
-                <ul className="hidden md:flex space-x-8 text-[16px] text-text-100 relative">
+                <ul className="hidden  items-center justify-center  lg:flex lg:space-x-4  text-text-100 relative">
                     <List />
                 </ul>
             </div>
-            <span className="hidden md:flex" ><Search /></span>
+            <span className="hidden lg:flex relative" ><Search /></span>
         </nav >
     );
 };

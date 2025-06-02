@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './nav.css'
 
 export default function Search() {
     const [onSearch, setOnSearch] = useState(null);
@@ -6,9 +7,9 @@ export default function Search() {
     return (<>
         {/* Search Box */}
         <div
-            className={`relative flex items-center justify-between h-[30px] transition-all duration-300 
-                    px-4 py-1 rounded-[5px] border-b-2 border-b-red-500 
-                    bg-[#1a1a1a] ${onSearch === "enter" ? "w-[420px]" : "w-[210px]"}`}
+            className={` relative flex items-center justify-between h-[30px] transition-all duration-300  gap-2
+                    px-4 py-1 rounded-[5px] border-b-2 border-b-red-500
+                    bg-[#1a1a1a] ${onSearch === "enter" ? "lg:w-full xl:w-[420px] " : "w-fit"}`}
             onMouseEnter={() => setOnSearch("enter")}
             onMouseLeave={() => setOnSearch(null)}
         >
@@ -17,7 +18,11 @@ export default function Search() {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Search by title or author"
-                className="w-full h-full bg-transparent text-[14px] text-white placeholder:text-text-75 outline-none"
+                className={`w-full h-full bg-transparent text-[14px]
+                 text-white placeholder:text-text-75 outline-none
+                 ${onSearch === "enter" ? 'top-0 left-0 w-full' : 'search'}
+                 `
+                }
             />
             <svg xmlns="http://www.w3.org/2000/svg"
                 width="16" height="16" fill="currentColor"
