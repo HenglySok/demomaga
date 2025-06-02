@@ -12,7 +12,7 @@ function Cart({ id, title, author, image, chapter, views }) {
     }
     return (
         <article className="relative w-[147px] h-[210px] sm:w-[206px] sm:h-[294px] md:w-[152px] md:h-[217px] lg:w-[153px] lg:h-[230px] xl:w-[188px] xl:h-[275px] mx-auto rounded-b-xl overflow-hidden cursor-pointer">
-            <span className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold text-center rotate-[-45deg] origin-top-left z-10 shadow-md">
+            <span className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold text-center rotate-[-45deg] origin-top-left z-1 shadow-md">
                 <span>UP</span>
             </span>
             <div className="w-full relative h-full">

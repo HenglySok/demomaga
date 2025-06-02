@@ -7,7 +7,7 @@ const NavBar = () => {
     const [isMenuMobileON, setIsMenuMobileON] = useState(false);
 
     return (
-        <nav className="flex items-center justify-between shadow relative w-full h-fit  z-30 ">
+        <nav className="flex items-center justify-between shadow relative w-full h-fit z-4">
             <button
                 onClick={() => setIsMenuMobileON(!isMenuMobileON)}
                 className="flex lg:hidden"
@@ -27,7 +27,7 @@ const NavBar = () => {
                 </svg>
             </button>
 
-            <div className="absolute top-25 left-3 bg-primary-100 w-[200px] rounded z-100 transition-all duration-500">
+            <div className="absolute top-25 left-3 bg-primary-100 w-[200px] z-3 rounded transition-all duration-500">
                 <ul
                     className={`flex flex-col lg:hidden text-[16px] text-text-100 justify-start items-start rounded-[5px] transition-[max-height,opacity] duration-500 ease-in-out overflow-hidden ${isMenuMobileON ? "p-2 max-h-[500px] opacity-100" : "p-0 max-h-0 opacity-0"
                         }`}
@@ -36,7 +36,7 @@ const NavBar = () => {
                 </ul>
             </div>
 
-            <ul className="w-full h-full absolute top-0 right-0 z-[-1] flex justify-between overflow-hidden gap-3">
+            <ul className="w-full h-full absolute top-0 right-0 z-[-1] flex justify-between overflow-hidden">
                 {bgList.map((bg) => (
                     <li key={bg.id} className="flex-1">
                         <img

@@ -1,9 +1,7 @@
 import './App.css'
 import { Banner } from './components/Banner'
 import { CartList } from './components/Cart'
-import Footer from './Layouts/Footer/Footer'
 import { HottestCartList } from './components/HottestCart'
-import NavBar from './Layouts/NavBar/NavBar'
 import SocialMediaBanner from './components/SocialMediaBanner'
 
 
@@ -34,8 +32,8 @@ function App() {
           </div>
 
           {/* Sticky Sidebar */}
-          <div className="sticky top-6 self-start h-fit">
-            <div className="bg-[#363A4C] w-full rounded-[10px] mb-5">
+          <div className="sticky top-6 self-start h-fit z-10">
+            <div className="bg-[#363A4C] w-full rounded-[10px] mb-5 ">
               <SocialMediaBanner />
             </div>
             <HottestCartList />
