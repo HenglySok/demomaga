@@ -57,7 +57,7 @@ export function HottestCartList() {
 
 
     return (
-        <div className="flex relative">
+        <div className="flex relative z-100">
             {/* Floating Toggle Button (only visible on mobile) */}
             <button
                 onClick={() => setIsOn(!isOn)}

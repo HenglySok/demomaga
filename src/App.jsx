@@ -2,7 +2,7 @@ import './App.css'
 import { Banner } from './components/Banner'
 import { CartList } from './components/Cart'
 import { HottestCartList } from './components/HottestCart'
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar/NavBar'
 import SocialMediaBanner from './components/SocialMediaBanner'
 import Test from './components/Test'
 
