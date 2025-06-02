@@ -11,7 +11,7 @@ const NavBar = () => {
     const [isMenuMobileON, setIsMenuMobileON] = useState(false);
 
     return (
-        <nav className="flex items-center justify-between px-6 py-4 shadow lg:overflow-hidden relative w-full z-30">
+        <nav className="flex items-center justify-between px-6 py-4 shadow relative w-full h-fit z-30 m-5">
             <button
                 onClick={() => setIsMenuMobileON(!isMenuMobileON)}
                 className="flex lg:hidden"
