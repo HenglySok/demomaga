@@ -1,11 +1,10 @@
 import './App.css'
 import { Banner } from './components/Banner'
 import { CartList } from './components/Cart'
-import Footer from './components/Footer/Footer'
+import Footer from './Layouts/Footer/Footer'
 import { HottestCartList } from './components/HottestCart'
-import NavBar from './components/NavBar/NavBar'
+import NavBar from './Layouts/NavBar/NavBar'
 import SocialMediaBanner from './components/SocialMediaBanner'
-import Test from './components/Test'
 
 
 
@@ -24,24 +23,26 @@ function App() {
 
 
   return (
-    <section className='w-full  '>
-      <NavBar />
+    <section className='w-full '>
       <Banner />
-      <div className='w-[90%] mx-auto'>
+      <div className="w-[90%] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full mb-5">
 
-        <div className='flex md:justify-center lg:justify-center md:gap-3 w-full mb-5'>
-          <div className='w-ful'>
+          {/* Main Content */}
+          <div>
             <CartList />
           </div>
-          <div className='max-w-[350px] flex flex-col gap-5'>
-            <span className='bg-[#363A4C] w-fit  rounded-[10px]' ><SocialMediaBanner /></span>
+
+          {/* Sticky Sidebar */}
+          <div className="sticky top-6 self-start h-fit">
+            <div className="bg-[#363A4C] w-full rounded-[10px] mb-5">
+              <SocialMediaBanner />
+            </div>
             <HottestCartList />
           </div>
 
         </div>
-
       </div>
-      <Footer />
     </section>
   )
 }

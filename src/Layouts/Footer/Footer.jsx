@@ -1,5 +1,5 @@
 import React from 'react'
-import SocialMediaBanner from '../SocialMediaBanner'
+import SocialMediaBanner from '../../components/SocialMediaBanner'
 import { list } from './listFooter'
 import footer from '../../assets/img/footer.png'
 
@@ -10,7 +10,7 @@ const Footer = () => {
                 <span className='w-fit'>
                     <SocialMediaBanner />
                 </span>
-                <ul className='flex justify-between items-center w-full text-text-100 text-[14px]'>
+                <ul className='flex flex-col lg:flex-row justify-between items-center w-full text-text-100 text-[14px] flex-wrap space-x-8'>
                     {
                         list.map((item, index) => (
                             <li key={index}>

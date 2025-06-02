@@ -7,7 +7,7 @@ export default function Search() {
     return (<>
         {/* Search Box */}
         <div
-            className={` relative flex items-center justify-between h-[30px] transition-all duration-300  gap-2
+            className={` relative flex items-center justify-between h-[30px] transition-all duration-500t gap-2
                     px-4 py-1 rounded-[5px] border-b-2 border-b-red-500
                     bg-[#1a1a1a] ${onSearch === "enter" ? "lg:w-full xl:w-[420px] " : "w-fit"}`}
             onMouseEnter={() => setOnSearch("enter")}
@@ -18,7 +18,7 @@ export default function Search() {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Search by title or author"
-                className={`w-full h-full bg-transparent text-[14px]
+                className={`w-full h-full bg-transparent text-[14px] transition-all duration-500
                  text-white placeholder:text-text-75 outline-none
                  ${onSearch === "enter" ? 'top-0 left-0 w-full' : 'search'}
                  `

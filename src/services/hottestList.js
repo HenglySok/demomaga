@@ -21,34 +21,34 @@ const hottestList =
             "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
             "rateing": 452628
         },
-        {
-            "id": 4,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "rateing": 452628
-        },
-        {
-            "id": 5,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "rateing": 452628
-        },
-        {
-            "id": 6,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "rateing": 452628
-        },
-        {
-            "id": 7,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "rateing": 452628
-        },
+        // {
+        //     "id": 4,
+        //     "title": "Demon Slayer",
+        //     "author": "Koyoharu Gotouge",
+        //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
+        //     "rateing": 452628
+        // },
+        // {
+        //     "id": 5,
+        //     "title": "Demon Slayer",
+        //     "author": "Koyoharu Gotouge",
+        //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
+        //     "rateing": 452628
+        // },
+        // {
+        //     "id": 6,
+        //     "title": "Demon Slayer",
+        //     "author": "Koyoharu Gotouge",
+        //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
+        //     "rateing": 452628
+        // },
+        // {
+        //     "id": 7,
+        //     "title": "Demon Slayer",
+        //     "author": "Koyoharu Gotouge",
+        //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
+        //     "rateing": 452628
+        // },
     ];
 
 export default hottestList;

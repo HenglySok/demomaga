@@ -6,9 +6,11 @@ import bg_manag from "../assets/img/bg_manga.jpg"
 
 function HottestCart({ title, author, image, rateing }) {
     return (
-        <article className='flex items-center justify-start gap-6
-        ps-4 p-2  h-[166px] w-full cursor-pointer rounded-[10px]
-        transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-black to-primary-75 to-40% ' >
+        <article className='flex items-center justify-start 
+         gap-6 ps-4 p-2  h-[166px] w-full cursor-pointer rounded-[10px]
+         transition-all duration-300 ease-in-out 
+         hover:bg-gradient-to-r from-black to-primary-75 to-40% '
+        >
             <img
                 className='h-[141px] w-[103px]'
                 src={image} alt="" />
@@ -57,11 +59,11 @@ export function HottestCartList() {
 
 
     return (
-        <div className="flex relative z-100">
+        <div className="flex  z-100 ">
             {/* Floating Toggle Button (only visible on mobile) */}
             <button
                 onClick={() => setIsOn(!isOn)}
-                className="fixed right-5 top-30 z-30 flex justify-center items-center
+                className="fixed right-5 top-30 z-30 flex justify-center items-center 
                            h-[50px] w-[50px] rounded-2xl bg-primary-100 text-[12px] md:hidden"
             >
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -75,12 +77,12 @@ export function HottestCartList() {
             {/* Panel List */}
             <div
                 className={`w-[80%]  h-full md:h-fit overflow-y-scroll  mx-auto md:w-full bg-gradient-to-t from-black to-primary-75  pb-[200px] z-20
-                                        ${isOn ? "block" : "hidden"} md:block  rounded-t-[10px]
+                                        ${isOn ? "block" : "hidden"} md:block  rounded-t-[10px] 
                                         fixed top-0 left-0 md:static transition-all duration-700 ease-in`}
             >
 
                 {/*Logo banner */}
-                <div className="hidden md:flex fixed top-0 relative justify-center items-center rounded-[10px]">
+                <div className="hidden md:flex relative justify-center items-center rounded-[10px]">
                     <img src={bg_manag} alt="manga pic" className="rounded-t-[10px]" />
                     <span className="bg-primary-100 px-20 py-3 absolute text-text-100 text-[32px]">Logo</span>
                 </div>

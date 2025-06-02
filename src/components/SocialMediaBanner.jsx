@@ -5,7 +5,7 @@ function SocialMediaBanner() {
     return (
         <>
             {/*Socal Banner */}
-            <div className="hidden md:flex justify-between items-center  w-fit
+            <div className="hidden md:flex justify-between items-center  w-full
                 h-[55px] text-text-100 text-[14px] ">
                 {/*discord*/}
                 <div
