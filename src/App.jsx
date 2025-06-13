@@ -24,7 +24,7 @@ function App() {
     <section className='w-full '>
       <Banner />
       <div className="w-[90%] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full mb-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full mb-5 max-w-screen-2xl mx-auto">
 
           {/* Main Content */}
           <div>

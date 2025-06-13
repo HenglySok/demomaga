@@ -5,8 +5,8 @@ import footer from '../../assets/img/footer.png'
 
 const Footer = () => {
     return (
-        <footer className='bg-gradient-to-b from-black to-primary-75 to-100% p-20 border-t-1 border-text-100'>
-            <div className='w-full lg:w-[80%] mx-auto flex items-center justify-center flex-col gap-10'>
+        <footer className='bg-gradient-to-b from-black to-primary-75 to-100% p-20 border-t-1 border-text-100 '>
+            <div className='w-full lg:w-[80%]  flex items-center justify-center flex-col gap-10 max-w-screen-xl mx-auto'>
                 <span className='w-fit'>
                     <SocialMediaBanner />
                 </span>
