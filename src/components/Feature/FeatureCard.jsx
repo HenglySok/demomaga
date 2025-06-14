@@ -1,293 +1,52 @@
-import { useRef } from "react";
-import Cart from "../Cart";
 
 
-const cartList =
-    [
-        {
-            "id": 233,
-            "title": "Hunter X Hunter",
-            "author": "Yoshihiro Togashi",
-            "image": "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            "chapter": 352,
-            "views": 7346884
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-        {
-            "id": 237,
-            "title": "Naruto",
-            "author": "Masashi Kishimoto",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiccwKj3fabqP1EGVJgaVGN4Bvaaxdy64fTg&s",
-            "chapter": 1020,
-            "views": 6430784
-        },
-        {
-            "id": 238,
-            "title": "Chainsaw Man",
-            "author": "Tatsuki Fujimoto",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyl7L1WIdbZOZhN1XTBxquTZVzePYZVz6NfQ&s",
-            "chapter": 32,
-            "views": 382404
-        },
-        {
-            "id": 233,
-            "title": "Hunter X Hunter",
-            "author": "Yoshihiro Togashi",
-            "image": "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            "chapter": 352,
-            "views": 7346884
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-        {
-            "id": 237,
-            "title": "Naruto",
-            "author": "Masashi Kishimoto",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiccwKj3fabqP1EGVJgaVGN4Bvaaxdy64fTg&s",
-            "chapter": 1020,
-            "views": 6430784
-        },
-        {
-            "id": 238,
-            "title": "Chainsaw Man",
-            "author": "Tatsuki Fujimoto",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyl7L1WIdbZOZhN1XTBxquTZVzePYZVz6NfQ&s",
-            "chapter": 32,
-            "views": 382404
-        },
-        {
-            "id": 233,
-            "title": "Hunter X Hunter",
-            "author": "Yoshihiro Togashi",
-            "image": "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            "chapter": 352,
-            "views": 7346884
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-        {
-            "id": 233,
-            "title": "Hunter X Hunter",
-            "author": "Yoshihiro Togashi",
-            "image": "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            "chapter": 352,
-            "views": 7346884
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-        {
-            "id": 233,
-            "title": "Hunter X Hunter",
-            "author": "Yoshihiro Togashi",
-            "image": "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            "chapter": 352,
-            "views": 7346884
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-        {
-            "id": 233,
-            "title": "Hunter X Hunter",
-            "author": "Yoshihiro Togashi",
-            "image": "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            "chapter": 352,
-            "views": 7346884
-        },
-        {
-            "id": 234,
-            "title": "One Piece",
-            "author": "Eiichiro Oda",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NqwOcLRIGIaiEsLaoplT4uiiO0vP3sPgZQ&s",
-            "chapter": 1149,
-            "views": 232373
-        },
-        {
-            "id": 235,
-            "title": "Demon Slayer",
-            "author": "Koyoharu Gotouge",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjErp_U0j9M_27CSgYJOe-Zf_J_0FSLJyTSQ&s",
-            "chapter": 53,
-            "views": 194563
-        },
-        {
-            "id": 236,
-            "title": "Black Clover",
-            "author": "Yuki Tabata",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1hSDy685CLfoMuD7N02HIfngif8K8rQAoqA&s",
-            "chapter": 671,
-            "views": 3533572
-        },
-    ]
-export default cartList;
+export const featurecard = [
+    {
+        'id': 1,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 2,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 4,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 5,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 6,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 7,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 8,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 9,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+    {
+        'id': 10,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/dahlia-1508785047.jpg?crop=1.00xw:0.669xh;0,0.0136xh&resize=980:*",
+    },
+];
 
-export function FeatureCard() {
-    const scrollRef = useRef(null);
-
-    const scrollLeft = () => {
-        if (scrollRef.current) {
-            s
-            scrollRef.current.scrollLeft -= 100;
-        }
-    }
-
-    const scrollRight = () => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollLeft += 100; // Adjust scroll distance as needed
-        }
-    };
+const FeatureCard = ({ id, image }) => {
     return (
-
-        <div className="flex gap-5 w-[95%] bg-amber-300 overflow-x-scroll p-5 rounded-2xl">
-            {
-                cartList.map((item =>
-                    <span>
-                        <Cart
-                            key={item.id}
-                            author={item.author}
-                            chapter={item.chapter}
-                            title={item.title}
-                            image={item.image}
-                            views={item.views}
-                            id={item.id}
-                        />
-                    </span>
-                ))
-            }
+        <div key={id} className="w-full h-full overflow-auto">
+            <img src={image}
+                className="h-full"
+                alt="" />
         </div>
-    );
+    )
 }
+
+export default FeatureCard
