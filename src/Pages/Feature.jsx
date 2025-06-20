@@ -11,7 +11,7 @@ export default function Feature() {
           <div className=" bg-black my-3 p-3">
             <h3 className="text-xl text-text-100">WEEKLY SHONEN JUM</h3>
           </div>
-          <div className="flex  items-center scrollbar-x-hide overflow-x-auto scrollbar-hide h-fit gap-6 px-4">
+          <div className="flex  items-center overflow-x-auto scrollbar-hide h-fit gap-6 px-4">
             {featurecard.map((item) => (
               <div key={item.id} className="flex-shrink-0 w-[152px] h-[228px] rounded-xl overflow-hidden shadow-lg ">
                 <FeatureCard image={item.image} />
