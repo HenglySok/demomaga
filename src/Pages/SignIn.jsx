@@ -62,13 +62,13 @@ export default function SignIn() {
                 </div>
 
                 <button className="w-full flex items-center justify-center
-                gap-2 bg-[#FFFFFF30] p-2 rounded-md">
+                gap-2 bg-[#FFFFFF30] p-2 rounded-md hover:bg-[#FFFFFF50]">
                     Sign In With Google
                     <FcGoogle />
                 </button>
 
-                <div className="flex items-center justify-between">
-                    <span className="w-full text-sm text-center">
+                <div className="w-full flex justify-center">
+                    <span className="text-sm text-center w-fit hover:cursor-pointer">
                        Forgot password?
                     </span>
                 </div>

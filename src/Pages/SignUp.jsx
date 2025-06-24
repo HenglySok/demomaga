@@ -51,7 +51,7 @@ export default function SignUp() {
                     className="w-full bg-primary-100 text-white py-2 rounded-md
                     hover:bg-primary-75 transition-colors"
                 >
-                    Sign In
+                    Sign Up
                 </button>
 
                 <div className="flex items-center gap-2 justify-start">

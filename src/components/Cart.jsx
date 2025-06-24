@@ -12,12 +12,12 @@ function Cart({ id, title, author, image, chapter, views }) {
   }
   return (
     <article
-      className="relative w-[147px] h-[210px] sm:w-[206px] sm:h-[294px] 
+      className="relative w-[147px] h-[210px] sm:w-[206px] sm:h-[294px]
       md:w-[152px] md:h-[217px] lg:w-[153px] lg:h-[230px] xl:w-[188px]
       xl:h-[275px] mx-auto rounded-b-xl overflow-hidden cursor-pointer"
     >
       <span
-        className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex 
+        className="absolute top-[29px] left-[-30px] w-[60px] py-2 px-10 flex
         items-center justify-center bg-red-600 text-white text-[10px]
         font-bold text-center rotate-[-45deg] origin-top-left z-1 shadow-md"
       >
@@ -32,13 +32,13 @@ function Cart({ id, title, author, image, chapter, views }) {
         <div className="absolute bottom-0 text-white w-full">
           <div className="bg-gradient-to-t from-black to-#2D2C2C">
             <div
-              className="group px-[5px] pt-[5px] transition-all 
+              className="group px-[5px] pt-[5px] transition-all
               duration-300 ease-in-out hover:py-7 hover:scale-[1.02]
               hover:bg-muted rounded-md cursor-pointer"
             >
               <h3
-                className="text-text-100 text-[18px] font-bold 
-                transition-colors duration-300 group-hover:text-primary-100"
+                className="text-text-100 text-[18px] font-bold
+                transition-colors duration-300 group-hover:text-secondary-100"
               >
                 {title}
               </h3>
@@ -47,7 +47,7 @@ function Cart({ id, title, author, image, chapter, views }) {
           </div>
           <div
             className="bg-black relative rounded-b-xl border-t-white
-            border-t-1 transition-all duration-300 ease-in-out 
+            border-t-1 transition-all duration-300 ease-in-out
             hover:bg-gradient-to-b from-black to-primary-75 hover:border-primary-75"
           >
             <div className="px-[5px] pb-[30px]  ">
