@@ -1,19 +1,7 @@
 import { useState } from "react";
 
 export default function SignUp() {
-  async function handleSignUp() {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    const response = await fetch(
-      "https://mangaapi-g1f2.onrender.com/api/v1/auth/register",
-      {
-        method: "POST",
-        body: JSON.stringify({ ...createStateSign }),
-        headers: myHeaders,
-      }
-    );
-  }
 
   const [createStateSign, setCreateStateSign] = useState({
     firstName: "",

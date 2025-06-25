@@ -7,18 +7,24 @@ import RootLayout from './Layouts/root/RootLayout.jsx';
 import Feature from "./Pages/Feature.jsx";
 import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp.jsx";
+import { Provider } from 'react-redux';
+import { store } from './app/store.js';
+import { Counter } from './features/counter/Counter.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes >
-          <Route path='sign_in' element={<SignIn/>} />
-          <Route path='sign_up' element={<SignUp/>} />
-        <Route path="/" element={<RootLayout />}>
+    <Provider store={store}> {/* Add store prop */}
+      <BrowserRouter>
+        <Routes>
+          <Route path='sign_in' element={<SignIn />} />
+          <Route path='sign_up' element={<SignUp />} />
+          <Route path='redux' element={<Counter />} />
+          <Route path="/" element={<RootLayout />}>
             <Route index element={<App />} />
-            <Route path='feature' element={<Feature/>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>,
+            <Route path='feature' element={<Feature />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </StrictMode>
 )
