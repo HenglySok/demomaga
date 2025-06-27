@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 export default function SignUp() {
-
-
   const [createStateSign, setCreateStateSign] = useState({
     firstName: "",
     lastName: "",
@@ -29,6 +27,7 @@ export default function SignUp() {
           <input
             type="text"
             placeholder="First Name"
+            name="firtname"
             value={createStateSign.firstName}
             onChange={(e) => {
               setCreateStateSign({
@@ -42,6 +41,7 @@ export default function SignUp() {
           <input
             type="text"
             placeholder="Last Name"
+            name="lastname"
             value={createStateSign.lastName}
             onChange={(e) => {
               setCreateStateSign({
@@ -57,6 +57,7 @@ export default function SignUp() {
         <input
           type="text"
           placeholder="Email or Phone Number"
+          name="email"
           value={createStateSign.email}
           onChange={(e) => {
             setCreateStateSign({ ...createStateSign, email: e.target.value });
@@ -68,6 +69,7 @@ export default function SignUp() {
         <input
           type="text"
           placeholder="Pasword"
+          name="password"
           value={createStateSign.password}
           onChange={(e) => {
             setCreateStateSign({
@@ -82,6 +84,7 @@ export default function SignUp() {
         <input
           type="text"
           placeholder="Confirm Pasword"
+          name="confirmpassword"
           value={createStateSign.confirmPassword}
           onChange={(e) => {
             setCreateStateSign({
