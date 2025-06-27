@@ -1,29 +1,20 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
-export const authAPI = createApi({
-  reducerPath: 'authAPI',
+// Define a service using a base URL and expected endpoints
+export const authApi = createApi({
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_AUTH_ENDPOINT, 
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`); 
-      }
-      return headers;
-    }
+    baseUrl: import.meta.env.VITE_VIEW_API_AUTH_ENDPOINT
   }),
   endpoints: (build) => ({
     getLogin: build.mutation({
       query: ({ email, password }) => ({
-        url: "/login/",
+        url: "/login",
         method: "POST",
-        body: { email, password },
-      }),
-    }),
+        body: { email, password }
+      })
+    })
   }),
-});
-
-
-export const { useGetLoginMutation } = authAPI;
+})
+export const { useGetLoginMutation } = authApi;

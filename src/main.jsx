@@ -9,7 +9,6 @@ import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
-import Login from "./Pages/SignIn.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,7 +17,7 @@ createRoot(document.getElementById("root")).render(
       {/* Add store prop */}
       <BrowserRouter>
         <Routes>
-          <Route path="sign_in" element={<Login />} />
+          <Route path="sign_in" element={<SignIn />} />
           <Route path="sign_up" element={<SignUp />} />
           <Route path="/" element={<RootLayout />}>
             <Route index element={<App />} />
