@@ -21,7 +21,7 @@ export default function SignUp() {
         className="p-8 rounded shadow-md w-full max-w-sm space-y-4
                 bg-[#00000050] text-text-75"
       >
-        <h2 className="text-2xl font-semibold ">Sign Up</h2>
+        <h2 className="text-2xl font-semibold cursor-default">Sign Up</h2>
 
         <div className="flex gap-2 w-full">
           <input
@@ -99,17 +99,17 @@ export default function SignUp() {
         <button
           type="submit"
           className="w-full bg-primary-100 text-white py-2 rounded-md
-                    hover:bg-primary-75 transition-colors"
+                    hover:bg-primary-75 transition-colors cursor-pointer"
         >
           Sign Up
         </button>
 
-        <div className="flex items-center gap-2 justify-start">
-          <input type="checkbox" />
+        <div className="flex items-center gap-2 justify-start cursor-default">
+          <input className="cursor-pointer" type="checkbox" />
           Remember me
         </div>
         <div className="flex items-center gap-2 justify-start text-[12px]">
-          <span>Do you already have an account?</span>
+          <span className="cursor-default">Do you already have an account?</span>
           <span>Sign In now.</span>
         </div>
       </form>

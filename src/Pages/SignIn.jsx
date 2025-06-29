@@ -1,9 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
 import { useGetLoginMutation } from "../redux/services/authSlice";
 import { ErrorMessage, useFormik } from "formik";
+import {useState} from "react";
 
 export default function SignIn() {
   const [getLogin, { isLoading }] = useGetLoginMutation();
+  const [userOfData, setUserOfData] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -12,16 +14,41 @@ export default function SignIn() {
     },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
-        // Replace with actual API call
+        // Replace it with actual API call
         const response = await getLogin(values).unwrap();
         alert("Login successful");
+        if (response) {
+          localStorage.setItem("token", response?.data.token);
+          setUserOfData(response?.data.user);
+        }
         console.log(response);
       } catch (error) {
         setErrors({ general: error?.data?.message || "Login failed" });
       }
       setSubmitting(false);
+
     },
   });
+
+  if (userOfData) {
+    return (
+      <>
+        <div className="flex items-center justify-center h-full w-full text-text-100 text-[24px] font-bold cursor-default">
+          You are login.
+        </div>
+
+        <button
+          onClick={()=>{
+            localStorage.removeItem("token");
+            setUserOfData(null);
+          }}
+        className="p-3 bg-primary-100 text-white rounded-md hover:bg-primary-75 transition-colors cursor-pointer"
+        >
+          logout
+        </button>
+      </>
+    )
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
@@ -29,7 +56,7 @@ export default function SignIn() {
         onSubmit={formik.handleSubmit}
         className="p-8 rounded shadow-md w-full max-w-sm space-y-4 bg-[#00000050] text-text-75"
       >
-        <h2 className="text-2xl font-semibold">Sign in</h2>
+        <h2 className="text-2xl font-semibold cursor-default">Sign in</h2>
 
         {formik.errors.general && (
           <div className="text-red-500 text-sm">{formik.errors.general}</div>
@@ -69,7 +96,8 @@ export default function SignIn() {
         <button
           type="submit"
           disabled={isLoading || formik.isSubmitting}
-          className={`w-full bg-primary-100 text-white py-2 rounded-md hover:bg-primary-75 transition-colors ${
+          className={`w-full bg-primary-100 text-white py-2 rounded-md hover:bg-primary-75 transition-colors
+           cursor-pointer${
             isLoading || formik.isSubmitting ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >
@@ -77,12 +105,14 @@ export default function SignIn() {
         </button>
 
         <div className="flex items-center justify-between">
-          <span className="w-full text-sm text-center">OR</span>
+          <span className="w-full text-sm text-center cursor-default">OR</span>
         </div>
 
         <button
           type="button"
-          className="w-full flex items-center justify-center gap-2 bg-[#FFFFFF30] p-2 rounded-md hover:bg-[#FFFFFF50]"
+          className="w-full flex items-center justify-center gap-2 bg-[#FFFFFF30] p-2 rounded-md hover:bg-[#FFFFFF50]
+          cursor-pointer
+          "
         >
           Sign In With Google
           <FcGoogle />
@@ -98,13 +128,14 @@ export default function SignIn() {
         </div>
 
         <div className="flex items-center gap-2 justify-start">
-          <input type="checkbox" id="remember" name="remember" />
-          <label htmlFor="remember">Remember me</label>
+          <input className="cursor-pointer" type="checkbox" id="remember" name="remember" />
+          <label className="cursor-default" htmlFor="remember">Remember me</label>
         </div>
 
         <div className="flex items-center gap-2 justify-start text-[12px]">
-          <span>New to Read Loop?</span>
-          <button type="button" className="hover:underline text-blue-400">
+          <span className="cursor-default">New to Read Loop?</span>
+          <button
+            type="button" className="hover:underline text-blue-400 cursor-pointer">
             Sign Up now
           </button>
         </div>
