@@ -1,11 +1,13 @@
 import { FcGoogle } from "react-icons/fc";
 import { useGetLoginMutation } from "../redux/services/authSlice";
 import { ErrorMessage, useFormik } from "formik";
-import {useState} from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function SignIn() {
   const [getLogin, { isLoading }] = useGetLoginMutation();
   const [userOfData, setUserOfData] = useState();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -16,9 +18,12 @@ export default function SignIn() {
       try {
         // Replace it with actual API call
         const response = await getLogin(values).unwrap();
+        console.log(response);
         alert("Login successful");
         if (response) {
-          localStorage.setItem("token", response?.data.token);
+          localStorage.setItem("accesstoken", response?.data.tokens.accessToken);
+          localStorage.setItem("refreshToken", response?.data.tokens.refreshToken);
+          localStorage.setItem("user", JSON.stringify(response?.data.user));
           setUserOfData(response?.data.user);
         }
         console.log(response);
@@ -26,28 +31,30 @@ export default function SignIn() {
         setErrors({ general: error?.data?.message || "Login failed" });
       }
       setSubmitting(false);
-
     },
   });
 
-  if (userOfData) {
-    return (
-      <>
-        <div className="flex items-center justify-center h-full w-full text-text-100 text-[24px] font-bold cursor-default">
-          You are login.
-        </div>
+  // if (userOfData) {
+  //   return (
+  //     <>
+  //       <div className="flex items-center justify-center h-full w-full text-text-100 text-[24px] font-bold cursor-default">
+  //         You are login.
+  //       </div>
 
-        <button
-          onClick={()=>{
-            localStorage.removeItem("token");
-            setUserOfData(null);
-          }}
-        className="p-3 bg-primary-100 text-white rounded-md hover:bg-primary-75 transition-colors cursor-pointer"
-        >
-          logout
-        </button>
-      </>
-    )
+  //       <button
+  //         onClick={()=>{
+  //           localStorage.removeItem("token");
+  //           setUserOfData(null);
+  //         }}
+  //       className="p-3 bg-primary-100 text-white rounded-md hover:bg-primary-75 transition-colors cursor-pointer"
+  //       >
+  //         logout
+  //       </button>
+  //     </>
+  //   )
+  // }
+  if (userOfData) {
+    navigate("/");
   }
 
   return (
@@ -97,9 +104,8 @@ export default function SignIn() {
           type="submit"
           disabled={isLoading || formik.isSubmitting}
           className={`w-full bg-primary-100 text-white py-2 rounded-md hover:bg-primary-75 transition-colors
-           cursor-pointer${
-            isLoading || formik.isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-          }`}
+           cursor-pointer${isLoading || formik.isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+            }`}
         >
           {isLoading ? "Signing In..." : "Sign In"}
         </button>

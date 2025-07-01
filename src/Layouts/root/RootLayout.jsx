@@ -1,15 +1,44 @@
-import NavBar from '../NavBar/NavBar'
-import { Outlet } from 'react-router'
-import Footer from '../Footer/Footer'
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import NavBar from "../NavBar/NavBar";
+import NavBarWithOutLogin from "../NavBar/NavBar";
+import { useGetLoginMutation } from "../../redux/services/authSlice";
 
 function RootLayout() {
+    const [hasToken, setHasToken] = useState(false);
+
+
+    // Check for token on mount and when localStorage changes
+    useEffect(() => {
+        const checkToken = () => {
+            const token = localStorage.getItem("token");
+            setHasToken(!!token);
+        };
+
+        // Initial check
+        checkToken();
+
+        // Listen for storage events (changes from other tabs)
+        const handleStorageChange = () => {
+            checkToken();
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+
     return (
         <>
-            <NavBar />
-            <Outlet />
+            {hasToken ? <NavBar /> : <NavBarWithOutLogin />}
+            <Outlet context={{ setHasToken }} />
             <Footer />
         </>
-    )
+    );
 }
 
-export default RootLayout
+export default RootLayout;
