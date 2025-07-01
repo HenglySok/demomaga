@@ -6,39 +6,43 @@ import NavBarWithOutLogin from "../NavBar/NavBar";
 import { useGetLoginMutation } from "../../redux/services/authSlice";
 
 function RootLayout() {
-    const [hasToken, setHasToken] = useState(false);
+  // const [hasToken, setHasToken] = useState(false);
 
+  // // Check for token on mount and when localStorage changes
+  // useEffect(() => {
+  //     const checkToken = () => {
+  //         const token = localStorage.getItem("token");
+  //         setHasToken(!!token);
+  //     };
 
-    // Check for token on mount and when localStorage changes
-    useEffect(() => {
-        const checkToken = () => {
-            const token = localStorage.getItem("token");
-            setHasToken(!!token);
-        };
+  //     // Initial check
+  //     checkToken();
 
-        // Initial check
-        checkToken();
+  //     // Listen for storage events (changes from other tabs)
+  //     const handleStorageChange = () => {
+  //         checkToken();
+  //     };
 
-        // Listen for storage events (changes from other tabs)
-        const handleStorageChange = () => {
-            checkToken();
-        };
+  //     window.addEventListener('storage', handleStorageChange);
 
-        window.addEventListener('storage', handleStorageChange);
+  //     // Cleanup
+  //     return () => {
+  //         window.removeEventListener('storage', handleStorageChange);
+  //     };
+  // }, []);
 
-        // Cleanup
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []);
-
-    return (
-        <>
-            {hasToken ? <NavBar /> : <NavBarWithOutLogin />}
-            <Outlet context={{ setHasToken }} />
-            <Footer />
-        </>
-    );
+  return (
+    // <>
+    //     {hasToken ? <NavBar /> : <NavBarWithOutLogin />}
+    //     <Outlet context={{ setHasToken }} />
+    //     <Footer />
+    // </>
+    <>
+      <NavBar />
+      <Outlet />
+      <Footer />
+    </>
+  );
 }
 
 export default RootLayout;
