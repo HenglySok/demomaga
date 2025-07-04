@@ -20,6 +20,7 @@ export default function SignIn() {
         const response = await getLogin(values).unwrap();
         console.log(response);
         alert("Login successful");
+      
         if (response) {
           localStorage.setItem("accesstoken", response?.data.tokens.accessToken);
           localStorage.setItem("refreshToken", response?.data.tokens.refreshToken);
@@ -29,6 +30,14 @@ export default function SignIn() {
         console.log(response);
       } catch (error) {
         setErrors({ general: error?.data?.message || "Login failed" });
+
+        if (error?.data?.errorCode === "AUTH_EMAIL_NOT_VERIFIED") {
+          localStorage.setItem("verifyEmail", values.email);
+          navigate("/verify_email");
+        } else {
+          setErrors({ general: error?.data?.message || "Login failed" });
+        }
+
       }
       setSubmitting(false);
     },

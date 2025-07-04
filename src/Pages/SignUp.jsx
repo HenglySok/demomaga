@@ -13,25 +13,39 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Basic validation
-    if (createStateSign.password !== createStateSign.confirmPassword) {
-      alert("Passwords don't match!");
-      return;
+  if (createStateSign.password !== createStateSign.confirmPassword) {
+    alert("Passwords don't match!");
+    return;
+  }
+
+  try {
+    const res = await getRegister(createStateSign).unwrap();
+    console.log("register success:", res);
+    if (res.data.isEmailVerified === false) {
+      localStorage.setItem("verifyEmail" , createStateSign.email);
+      navigate('/verify_email')
     }
 
-    try {
-      const res = await getRegister(createStateSign).unwrap();
-      console.log("register success:", res);
-      localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Registration error:", err);
-      // You might want to show an error message to the user here
+    // Optionally store the email for verification
+    ;
+  } catch (err) {
+    console.error("Registration error:", err);
+
+    if (err?.data?.errorCode === "AUTH_EMAIL_ALREADY_EXISTS") {
+      alert("This email is already registered. Try signing in instead.");
+      localStorage.setItem("verifyEmail", createStateSign.email);
+
+    alert("Account created! Please verify your email.");
+    navigate("/verify_email")
+    } else {
+      alert(err?.data?.message || "Registration failed. Try again later.");
     }
-  };
+  }
+};
+
 
   return (
     <div

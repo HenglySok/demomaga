@@ -1,5 +1,5 @@
 import { useState, } from "react";
-import hottestList from "../services/HottestList";
+import hottestList from "../services/hottestList"
 import bg_manag from "../assets/img/bg_manga.jpg"
 
 

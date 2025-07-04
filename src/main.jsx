@@ -9,6 +9,7 @@ import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
+import VerifyEmail from "./Pages/VerifyEmail.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="sign_in" element={<SignIn />} />
           <Route path="sign_up" element={<SignUp />} />
+          <Route path="verify_email" element={<VerifyEmail/>} />
           <Route path="/" element={<RootLayout />}>
             <Route index element={<App />} />
             <Route path="feature" element={<Feature />} />
