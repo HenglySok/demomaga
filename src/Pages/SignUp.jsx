@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGetRegisterMutation } from "../redux/services/authSlice";
 
 export default function SignUp() {
+  const [getRegister, { isLoading }] = useGetRegisterMutation();
+  const navigate = useNavigate();
   const [createStateSign, setCreateStateSign] = useState({
     firstName: "",
     lastName: "",
@@ -8,16 +12,34 @@ export default function SignUp() {
     password: "",
     confirmPassword: "",
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (createStateSign.password !== createStateSign.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    try {
+      const res = await getRegister(createStateSign).unwrap();
+      console.log("register success:", res);
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Registration error:", err);
+      // You might want to show an error message to the user here
+    }
+  };
+
   return (
     <div
       className="flex items-center justify-center min-h-screen
         bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover"
     >
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(createStateSign);
-        }}
+        onSubmit={handleSubmit}
         className="p-8 rounded shadow-md w-full max-w-sm space-y-4
                 bg-[#00000050] text-text-75"
       >
@@ -27,7 +49,7 @@ export default function SignUp() {
           <input
             type="text"
             placeholder="First Name"
-            name="firtname"
+            name="firstName"
             value={createStateSign.firstName}
             onChange={(e) => {
               setCreateStateSign({
@@ -37,11 +59,12 @@ export default function SignUp() {
             }}
             className="w-full px-4 py-2 border border-gray-300 rounded-md
                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
           <input
             type="text"
             placeholder="Last Name"
-            name="lastname"
+            name="lastName"
             value={createStateSign.lastName}
             onChange={(e) => {
               setCreateStateSign({
@@ -51,12 +74,13 @@ export default function SignUp() {
             }}
             className="w-full px-4 py-2 border border-gray-300 rounded-md
                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
         <input
-          type="text"
-          placeholder="Email or Phone Number"
+          type="email"
+          placeholder="Email"
           name="email"
           value={createStateSign.email}
           onChange={(e) => {
@@ -64,11 +88,12 @@ export default function SignUp() {
           }}
           className="w-full px-4 py-2 border border-gray-300 rounded-md
                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
         />
 
         <input
-          type="text"
-          placeholder="Pasword"
+          type="password"
+          placeholder="Password"
           name="password"
           value={createStateSign.password}
           onChange={(e) => {
@@ -79,12 +104,14 @@ export default function SignUp() {
           }}
           className="w-full px-4 py-2 border border-gray-300 rounded-md
                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+          minLength="6"
         />
 
         <input
-          type="text"
-          placeholder="Confirm Pasword"
-          name="confirmpassword"
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmPassword"
           value={createStateSign.confirmPassword}
           onChange={(e) => {
             setCreateStateSign({
@@ -94,14 +121,18 @@ export default function SignUp() {
           }}
           className="w-full px-4 py-2 border border-gray-300 rounded-md
                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+          minLength="6"
         />
 
         <button
           type="submit"
+          disabled={isLoading}
           className="w-full bg-primary-100 text-white py-2 rounded-md
-                    hover:bg-primary-75 transition-colors cursor-pointer"
+                    hover:bg-primary-75 transition-colors cursor-pointer
+                    disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Sign Up
+          {isLoading ? "Signing Up..." : "Sign Up"}
         </button>
 
         <div className="flex items-center gap-2 justify-start cursor-default">
@@ -110,7 +141,10 @@ export default function SignUp() {
         </div>
         <div className="flex items-center gap-2 justify-start text-[12px]">
           <span className="cursor-default">Do you already have an account?</span>
-          <span>Sign In now.</span>
+          <span className="text-blue-500 hover:underline cursor-pointer"
+            onClick={() => navigate("/sign_in")}>
+            Sign In now.
+          </span>
         </div>
       </form>
     </div>
