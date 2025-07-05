@@ -20,7 +20,7 @@ export default function SignIn() {
         const response = await getLogin(values).unwrap();
         console.log(response);
         alert("Login successful");
-      
+
         if (response) {
           localStorage.setItem("accesstoken", response?.data.tokens.accessToken);
           localStorage.setItem("refreshToken", response?.data.tokens.refreshToken);
@@ -150,6 +150,7 @@ export default function SignIn() {
         <div className="flex items-center gap-2 justify-start text-[12px]">
           <span className="cursor-default">New to Read Loop?</span>
           <button
+            onClick={() => navigate('/sign_up')}
             type="button" className="hover:underline text-blue-400 cursor-pointer">
             Sign Up now
           </button>

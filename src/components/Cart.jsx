@@ -1,5 +1,5 @@
 // Cart.jsx
-import cartList from "../services/cartList";
+import cartList from "../mockdata/cartList";
 
 function Cart({ id, title, author, image, chapter, views }) {
   {
