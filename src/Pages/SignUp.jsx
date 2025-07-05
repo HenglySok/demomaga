@@ -13,38 +13,38 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (createStateSign.password !== createStateSign.confirmPassword) {
-    alert("Passwords don't match!");
-    return;
-  }
-
-  try {
-    const res = await getRegister(createStateSign).unwrap();
-    console.log("register success:", res);
-    if (res.data.isEmailVerified === false) {
-      localStorage.setItem("verifyEmail" , createStateSign.email);
-      navigate('/verify_email')
+    if (createStateSign.password !== createStateSign.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
     }
 
-    // Optionally store the email for verification
-    ;
-  } catch (err) {
-    console.error("Registration error:", err);
+    try {
+      const res = await getRegister(createStateSign).unwrap();
+      console.log("register success:", res);
+      if (res.data.isEmailVerified === false) {
+        localStorage.setItem("verifyEmail", createStateSign.email);
+        navigate('/message_comfirm')
+      }
 
-    if (err?.data?.errorCode === "AUTH_EMAIL_ALREADY_EXISTS") {
-      alert("This email is already registered. Try signing in instead.");
-      localStorage.setItem("verifyEmail", createStateSign.email);
+      // Optionally store the email for verification
+      ;
+    } catch (err) {
+      console.error("Registration error:", err);
 
-    alert("Account created! Please verify your email.");
-    navigate("/verify_email")
-    } else {
-      alert(err?.data?.message || "Registration failed. Try again later.");
+      if (err?.data?.errorCode === "AUTH_EMAIL_ALREADY_EXISTS") {
+        alert("This email is already registered. Try signing in instead.");
+        localStorage.setItem("verifyEmail", createStateSign.email);
+
+        alert("Account created! Please verify your email.");
+        navigate("/message_comfirm")
+      } else {
+        alert(err?.data?.message || "Registration failed. Try again later.");
+      }
     }
-  }
-};
+  };
 
 
   return (

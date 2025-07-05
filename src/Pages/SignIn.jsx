@@ -33,7 +33,7 @@ export default function SignIn() {
 
         if (error?.data?.errorCode === "AUTH_EMAIL_NOT_VERIFIED") {
           localStorage.setItem("verifyEmail", values.email);
-          navigate("/verify_email");
+          navigate("/message_comfirm");
         } else {
           setErrors({ general: error?.data?.message || "Login failed" });
         }

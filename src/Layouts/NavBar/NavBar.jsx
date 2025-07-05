@@ -35,6 +35,8 @@ const NavBar = () => {
       localStorage.removeItem("accesstoken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
+      localStorage.removeItem("email");
+      localStorage.removeItem("verifyEmail");
       setIsAuthenticated(false);
       setUser(null);
       navigate("/");
@@ -107,15 +109,13 @@ const NavBar = () => {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 bg-black/80 z-40 transition-opacity duration-300 lg:hidden ${
-          isMenuMobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 bg-black/80 z-40 transition-opacity duration-300 lg:hidden ${isMenuMobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
         onClick={toggleMobileMenu}
       >
         <div
-          className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-primary-100 shadow-lg transform transition-transform duration-300 ${
-            isMenuMobileOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-primary-100 shadow-lg transform transition-transform duration-300 ${isMenuMobileOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col h-full p-4">
