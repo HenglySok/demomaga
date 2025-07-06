@@ -2,6 +2,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { useGetVerifyMutation } from "../../redux/services/authSlice";
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react";
+import { BsXCircle } from "react-icons/bs";
 
 function VerifyAccount() {
     const [searchParams] = useSearchParams();
@@ -20,8 +21,8 @@ function VerifyAccount() {
 
         try {
             await getVerifyCode({ code: verificationCode }).unwrap();
-            localStorage.setItem("isVerifySuccess", "true"); // ✅ Store flag
-            navigate("/sign_in"); // ✅ Go to login page
+            localStorage.setItem("isVerifySuccess", "true"); 
+            navigate("/sign_in");
         } catch (e) {
             console.log(e);
             if (e.data.message === "Invalid or expired verification code") {
@@ -51,29 +52,48 @@ function VerifyAccount() {
     return (
         <>
             <Toaster position="top-center" />
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
-                <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow flex flex-col items-center justify-center bg-linear-to-t black to-[#00000050] text-text-75">
+            <div className="flex gap-3 flex-col items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
+                <div className="max-w-md mx-auto p-6 border rounded shadow flex flex-col items-center justify-center bg-linear-to-t black to-[#00000050] text-text-75">
                     <h3 className="text-2xl text-text-100 font-bold">
                         Account confirmation
                     </h3>
                     <p className="text-center mb-4">To confirm your account, please follow the button below.</p>
-                    <button
+                    <div
+                    className="flex gap-3"
+                    >
+                        {
+                            errorTokenExpired === false && 
+                            <button
                         onClick={handleVerify}
-                        className={`bg-primary-100 px-3 py-1 rounded-[5px] font-bold ${isLoading || !verificationCode ? 'opacity-50 cursor-not-allowed' : ''
-                            }`}
+                        className={`bg-primary-100 px-3 py-1 rounded-[5px] font-bold 
+                            ${isLoading || !verificationCode ? 'opacity-50 cursor-not-allowed' : ''
+                            }
+                            hover:bg-primary-75 cursor-pointer`}
                         disabled={isLoading || !verificationCode}
                     >
                         {isLoading ? 'Verifying...' : 'Confirm account'}
                     </button>
+                        }
+
+                    {errorTokenExpired && 
+                    <button
+                    className="bg-[#00000050] text-text-100 border border-secondary-100
+                     px-3 py-1 rounded-[5px]
+                     hover:bg-black cursor-pointer"
+                    >
+                         Verify Again
+                    </button>
+                    }
+                    </div>
                 </div>
                 {
                     errorTokenExpired &&
-                    <div className="flex flex-col gap-3 bg-amber-200">
+                    <div className="flex bg-white 
+                    border-2 border-primary-75
+                    justify-center items-center gap-3
+                    rounded-[5px] bottom-25 right-70 px-4 py-1">
+                        <BsXCircle color="#C70039" />
                         <h3>Expired Verify</h3>
-                        <p>please verify again</p>
-                        <button>
-                            Verify Again
-                        </button>
                     </div>
                 }
             </div>

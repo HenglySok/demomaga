@@ -39,7 +39,7 @@ export default function SignUp() {
         localStorage.setItem("verifyEmail", createStateSign.email);
 
         alert("Account created! Please verify your email.");
-        navigate("/message_comfirm")
+        navigate("/sign_in")
       } else {
         alert(err?.data?.message || "Registration failed. Try again later.");
       }

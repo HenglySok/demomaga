@@ -1,5 +1,5 @@
 import { useState, } from "react";
-import hottestList from "../mockdata/HottestList";
+import hottestList from "../mockdata/hottestList"
 import bg_manag from "../assets/img/bg_manga.jpg"
 
 
