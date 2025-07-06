@@ -1,73 +1,91 @@
 import { FcGoogle } from "react-icons/fc";
 import { useGetLoginMutation } from "../redux/services/authSlice";
-import { ErrorMessage, useFormik } from "formik";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useFormik } from "formik";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+import * as Yup from "yup";
 
 export default function SignIn() {
   const [getLogin, { isLoading }] = useGetLoginMutation();
-  const [userOfData, setUserOfData] = useState();
+  const [userOfData, setUserOfData] = useState(null);
   const navigate = useNavigate();
+  const [isVerifySuccess, setIsVerifySuccess] = useState();
+
+  useEffect(() => {
+    const isVerifySuccess = localStorage.getItem("isVerifySuccess");
+    if (isVerifySuccess === "true") {
+      setIsVerifySuccess(true)
+      toast.success("Account verified successfully!");
+    }
+  }, []);
+
+
+
+  // Check verification success on component mount
+  // useEffect(() => {
+  //   const isVerifySuccess = localStorage.getItem("isVerifySuccess");
+  //   if (isVerifySuccess === "true") {
+  //     toast.success('Account verified successfully!');
+
+  //   }
+  // }, []);
+
+  // Form validation schema
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  });
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validationSchema,
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
-        // Replace it with actual API call
         const response = await getLogin(values).unwrap();
-        console.log(response);
-        alert("Login successful");
 
-        if (response) {
-          localStorage.setItem("accesstoken", response?.data.tokens.accessToken);
-          localStorage.setItem("refreshToken", response?.data.tokens.refreshToken);
-          localStorage.setItem("user", JSON.stringify(response?.data.user));
-          setUserOfData(response?.data.user);
+        if (response?.data) {
+          localStorage.setItem("accesstoken", response.data.tokens.accessToken);
+          localStorage.setItem("refreshToken", response.data.tokens.refreshToken);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          localStorage.removeItem("isVerifySuccess");
+          setUserOfData(response.data.user);
+          toast.success("Login successful");
         }
-        console.log(response);
       } catch (error) {
-        setErrors({ general: error?.data?.message || "Login failed" });
+        console.error("Login error:", error);
 
         if (error?.data?.errorCode === "AUTH_EMAIL_NOT_VERIFIED") {
           localStorage.setItem("verifyEmail", values.email);
           navigate("/message_comfirm");
         } else {
-          setErrors({ general: error?.data?.message || "Login failed" });
+          const errorMessage = error?.data?.message || "Login failed. Please try again.";
+          setErrors({ general: errorMessage });
+          toast.error(errorMessage);
         }
-
+      } finally {
+        setSubmitting(false);
       }
-      setSubmitting(false);
     },
   });
 
-  // if (userOfData) {
-  //   return (
-  //     <>
-  //       <div className="flex items-center justify-center h-full w-full text-text-100 text-[24px] font-bold cursor-default">
-  //         You are login.
-  //       </div>
-
-  //       <button
-  //         onClick={()=>{
-  //           localStorage.removeItem("token");
-  //           setUserOfData(null);
-  //         }}
-  //       className="p-3 bg-primary-100 text-white rounded-md hover:bg-primary-75 transition-colors cursor-pointer"
-  //       >
-  //         logout
-  //       </button>
-  //     </>
-  //   )
-  // }
-  if (userOfData) {
-    navigate("/");
-  }
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (userOfData) {
+      navigate("/");
+    }
+  }, [userOfData, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
+      <Toaster position="top-center" />
       <form
         onSubmit={formik.handleSubmit}
         className="p-8 rounded shadow-md w-full max-w-sm space-y-4 bg-[#00000050] text-text-75"
@@ -87,7 +105,10 @@ export default function SignIn() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="Email address"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${formik.touched.email && formik.errors.email
+              ? "border-red-500 focus:ring-red-500"
+              : "border-gray-300 focus:ring-blue-500"
+              }`}
           />
           {formik.touched.email && formik.errors.email && (
             <div className="text-red-500 text-xs mt-1">{formik.errors.email}</div>
@@ -102,7 +123,10 @@ export default function SignIn() {
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${formik.touched.password && formik.errors.password
+              ? "border-red-500 focus:ring-red-500"
+              : "border-gray-300 focus:ring-blue-500"
+              }`}
           />
           {formik.touched.password && formik.errors.password && (
             <div className="text-red-500 text-xs mt-1">{formik.errors.password}</div>
@@ -112,8 +136,7 @@ export default function SignIn() {
         <button
           type="submit"
           disabled={isLoading || formik.isSubmitting}
-          className={`w-full bg-primary-100 text-white py-2 rounded-md hover:bg-primary-75 transition-colors
-           cursor-pointer${isLoading || formik.isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+          className={`w-full bg-primary-100 text-white py-2 rounded-md hover:bg-primary-75 transition-colors ${isLoading || formik.isSubmitting ? "opacity-70 cursor-not-allowed" : ""
             }`}
         >
           {isLoading ? "Signing In..." : "Sign In"}
@@ -125,9 +148,7 @@ export default function SignIn() {
 
         <button
           type="button"
-          className="w-full flex items-center justify-center gap-2 bg-[#FFFFFF30] p-2 rounded-md hover:bg-[#FFFFFF50]
-          cursor-pointer
-          "
+          className="w-full flex items-center justify-center gap-2 bg-[#FFFFFF30] p-2 rounded-md hover:bg-[#FFFFFF50] cursor-pointer"
         >
           Sign In With Google
           <FcGoogle />
@@ -136,6 +157,7 @@ export default function SignIn() {
         <div className="w-full flex justify-center">
           <button
             type="button"
+            onClick={() => navigate('/forgot-password')}
             className="text-sm text-center w-fit hover:cursor-pointer hover:underline"
           >
             Forgot password?
@@ -156,6 +178,11 @@ export default function SignIn() {
           </button>
         </div>
       </form>
+      {localStorage.getItem('isVerifySuccess') === "true" &&
+        <h3 className="absolute bg-white rounded-[5px] bottom-5 right-5 px-4 py-1">
+          Email is Verified
+        </h3>
+      }
     </div>
   );
 }

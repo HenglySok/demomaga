@@ -3,6 +3,7 @@ import { Banner } from './components/Banner'
 import { CartList } from './components/Cart'
 import { HottestCartList } from './components/HottestCart'
 import SocialMediaBanner from './components/SocialMediaBanner'
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <section className='w-full '>
+      <Toaster position="top-center" />
       <Banner />
       <div className="w-[90%] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full mb-5 max-w-screen-2xl mx-auto">
