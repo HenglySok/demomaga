@@ -24,14 +24,14 @@ export const authApi = createApi({
       query: ({ code }) => ({
         url: "verify/email",
         method: "POST",
-        body: { code }, // ✅ Match API: { code: "xxx" }
+        body: { code }, // 
       }),
     }),
     getResendVerification: build.mutation({
       query: ({ email }) => ({
         url: "resend-verification",
         method: "POST",
-        body: { email }, // ✅ Match API: { email: "xxx@gmail.com" }
+        body: { email },
       }),
     }),
   }),

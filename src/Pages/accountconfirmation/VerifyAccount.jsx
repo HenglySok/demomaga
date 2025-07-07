@@ -1,16 +1,18 @@
 import { useNavigate, useSearchParams } from "react-router";
-import { useGetVerifyMutation } from "../../redux/services/authSlice";
+import { useGetVerifyMutation, useGetResendVerificationMutation } from "../../redux/services/authSlice";
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react";
-import { BsXCircle } from "react-icons/bs";
+import { FaTimesCircle } from "react-icons/fa";
 
 function VerifyAccount() {
     const [searchParams] = useSearchParams();
     const verificationCode = searchParams.get('code');
     const [getVerifyCode, { isLoading }] = useGetVerifyMutation();
+    const [getResendVerify, { isLoading: resendLonging }] = useGetResendVerificationMutation();
     const [isVerifySuccess, setIsVerifySuccess] = useState(null);
     const [errorTokenExpired, setErrorTokenExpired] = useState(false);
     const navigate = useNavigate();
+    const verifyEmail = localStorage.getItem("email");
 
     const handleVerify = async (e) => {
         e.preventDefault();
@@ -21,13 +23,30 @@ function VerifyAccount() {
 
         try {
             await getVerifyCode({ code: verificationCode }).unwrap();
-            localStorage.setItem("isVerifySuccess", "true"); 
+            localStorage.setItem("isVerifySuccess", "true");
             navigate("/sign_in");
         } catch (e) {
             console.log(e);
             if (e.data.message === "Invalid or expired verification code") {
                 setErrorTokenExpired(true);
                 console.log("error expire handle")
+            }
+            toast.error("Verification failed. Please try again.");
+        }
+    };
+
+    const handleResendVerify = async (e) => {
+        e.preventDefault();
+
+        try {
+            await getResendVerify({ email: verifyEmail }).unwrap();
+            localStorage.setItem("isVerifySuccess", "true");
+            window.open("https://mail.google.com/mail/u/0/#all", "_blank");
+        } catch (e) {
+            console.log(e);
+            if (e.data.message === "user not found") {
+                alert("User not found!");
+                navigate('.././sign_up');
             }
             toast.error("Verification failed. Please try again.");
         }
@@ -52,51 +71,57 @@ function VerifyAccount() {
     return (
         <>
             <Toaster position="top-center" />
-            <div className="flex gap-3 flex-col items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
-                <div className="max-w-md mx-auto p-6 border rounded shadow flex flex-col items-center justify-center bg-linear-to-t black to-[#00000050] text-text-75">
-                    <h3 className="text-2xl text-text-100 font-bold">
-                        Account confirmation
-                    </h3>
-                    <p className="text-center mb-4">To confirm your account, please follow the button below.</p>
-                    <div
-                    className="flex gap-3"
-                    >
-                        {
-                            errorTokenExpired === false && 
-                            <button
-                        onClick={handleVerify}
-                        className={`bg-primary-100 px-3 py-1 rounded-[5px] font-bold 
+            {
+                !errorTokenExpired ?
+                    <div className="flex gap-3 flex-col items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
+                        <div className="max-w-md mx-auto p-6 border rounded shadow flex flex-col items-center justify-center bg-linear-to-t black to-[#00000050] text-text-75">
+                            <h3 className="text-2xl text-text-100 font-bold">
+                                Account confirmation
+                            </h3>
+                            <p className="text-center mb-4">To confirm your account, please follow the button below.</p>
+                            <div
+                                className="flex gap-3"
+                            >
+                                <button
+                                    onClick={handleVerify}
+                                    className={`bg-primary-100 px-3 py-1 rounded-[5px] font-bold 
                             ${isLoading || !verificationCode ? 'opacity-50 cursor-not-allowed' : ''
-                            }
+                                        }
                             hover:bg-primary-75 cursor-pointer`}
-                        disabled={isLoading || !verificationCode}
-                    >
-                        {isLoading ? 'Verifying...' : 'Confirm account'}
-                    </button>
-                        }
-
-                    {errorTokenExpired && 
-                    <button
-                    className="bg-[#00000050] text-text-100 border border-secondary-100
+                                    disabled={isLoading || !verificationCode}
+                                >
+                                    {isLoading ? 'Verifying...' : 'Confirm account'}
+                                </button>
+                            </div>
+                        </div>
+                    </div> :
+                    <div className="flex gap-3 flex-col items-center justify-center min-h-screen
+                     bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover
+                      duration-700 ease-in-out
+                     ">
+                        <div className="max-w-md mx-auto p-6 border rounded shadow flex flex-col items-center justify-center bg-linear-to-t black to-[#00000050] text-text-75">
+                            <h3 className="text-2xl text-primary-100 font-bold flex gap-3 items-center bg-[#33333350]">
+                                <FaTimesCircle color="text-primary-100" />
+                                Failed Account confirmation
+                            </h3>
+                            <p className="text-center mb-4">To confirm your account, please follow the button below.</p>
+                            <div
+                                className="flex gap-3"
+                            >
+                                <button
+                                    onClick={handleResendVerify}
+                                    className="bg-[#00000050] text-text-100 border border-secondary-100
                      px-3 py-1 rounded-[5px]
                      hover:bg-black cursor-pointer"
-                    >
-                         Verify Again
-                    </button>
-                    }
+                                >
+                                    {
+                                        resendLonging ? "Verify Again..." : "Verify Again"
+                                    }
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                {
-                    errorTokenExpired &&
-                    <div className="flex bg-white 
-                    border-2 border-primary-75
-                    justify-center items-center gap-3
-                    rounded-[5px] bottom-25 right-70 px-4 py-1">
-                        <BsXCircle color="#C70039" />
-                        <h3>Expired Verify</h3>
-                    </div>
-                }
-            </div>
+            }
         </>
     );
 }

@@ -24,15 +24,15 @@ export default function SignUp() {
     try {
       const res = await getRegister(createStateSign).unwrap();
       console.log("register success:", res);
+      localStorage.setItem("email", createStateSign.email);
       if (res.data.isEmailVerified === false) {
         localStorage.setItem("verifyEmail", createStateSign.email);
-        navigate('/message_comfirm')
+        navigate('/message_comfirm');
       }
 
       // Optionally store the email for verification
-      ;
     } catch (err) {
-      console.error("Registration error:", err);
+      console.error("Registration error:", err.data.message);
 
       if (err?.data?.errorCode === "AUTH_EMAIL_ALREADY_EXISTS") {
         alert("This email is already registered. Try signing in instead.");
