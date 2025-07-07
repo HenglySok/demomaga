@@ -1,5 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
-import { useGetLoginMutation } from "../redux/services/authSlice";
+import { useGetLoginMutation } from "../../redux/services/authSlice";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ export default function SignIn() {
       setIsVerifySuccess(true)
       toast.success("Account verified successfully!");
       localStorage.removeItem("isVerifySuccess");
-      
+
     }
   }, []);
 
@@ -182,13 +182,13 @@ export default function SignIn() {
         </div>
       </form>
       {isVerifySuccess &&
-  <h3 className="flex absolute bg-white
+        <h3 className="flex absolute bg-white
    justify-center items-center gap-2
   rounded-[5px] bottom-25 right-70 px-4 py-1">
-    <FaCheckCircle color="#228B22"/>
-    Email is Verified
-  </h3>
-}
+          <FaCheckCircle color="#228B22" />
+          Email is Verified
+        </h3>
+      }
 
     </div>
   );

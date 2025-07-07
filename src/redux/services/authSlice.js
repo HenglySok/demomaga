@@ -34,7 +34,14 @@ export const authApi = createApi({
         body: { email },
       }),
     }),
-  }),
+    getFogotPassword: build.mutation({
+      query: ({ email }) => ({
+        url: "password/forgot",
+        method: "POST",
+        body: { email }
+      })
+    }),
+  })
 });
 
 export const {
@@ -42,4 +49,5 @@ export const {
   useGetRegisterMutation,
   useGetVerifyMutation,
   useGetResendVerificationMutation,
+  useGetFogotPasswordMutation,
 } = authApi;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetRegisterMutation } from "../redux/services/authSlice";
+import { useGetRegisterMutation } from "../../redux/services/authSlice";
 
 export default function SignUp() {
   const [getRegister, { isLoading }] = useGetRegisterMutation();

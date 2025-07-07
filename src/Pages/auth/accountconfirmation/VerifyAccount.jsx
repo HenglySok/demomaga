@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router";
-import { useGetVerifyMutation, useGetResendVerificationMutation } from "../../redux/services/authSlice";
+import { useGetVerifyMutation, useGetResendVerificationMutation } from "../../../redux/services/authSlice";
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react";
 import { FaTimesCircle } from "react-icons/fa";
