@@ -1,5 +1,8 @@
 // Cart.jsx
-import cartList from "../mockdata/cartList";
+// import cartList from "../mockdata/cartList";
+import { useEffect } from "react";
+import { useGetMangaQuery } from "../redux/services/mangaSlice";
+
 
 function Cart({ id, title, author, image, chapter, views }) {
   {
@@ -78,19 +81,20 @@ function Cart({ id, title, author, image, chapter, views }) {
 }
 
 export function CartList() {
+  const { data, isLoading, isError, error } = useGetMangaQuery();
+
+  // Process data only when available
+  const mangaList = data?.mangas || data?.data || data || [];
+
+  if (isLoading) return <div className="text-white p-10">Loading...</div>;
+  if (isError) return <div className="text-red-500 p-10">Error: {error.message}</div>;
+
   return (
-    <div
-      className="bg-gradient-to-b from-[#000000] to-[#252424]
-     to-80% w-full md:w-fit h-fit mx-auto rounded-[10px]"
-    >
-      <div className="ps-5  flex justify-between items-center w-full pt-3 pb-10">
-        <span className="text-text-100 0 text-[28px] ">Recently Update</span>
-        <span
-          className="flex items-center gap-3 justify-between px-5 py-2
-          bg-secondary-100 rounded-s-[5px] cursor-pointer transition-all
-          duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[20px] hover:pe-10"
-        >
-          <button className="cursor-pointer">All Update</button>
+    <div className="bg-gradient-to-b from-[#000000] to-[#252424] to-80% w-full md:w-fit h-fit mx-auto rounded-[10px]">
+      <div className="ps-5 flex justify-between items-center w-full pt-3 pb-10">
+        <span className="text-text-100 text-[28px]">Recently Updated</span>
+        <span className="flex items-center gap-3 justify-between px-5 py-2 bg-secondary-100 rounded-s-[5px] cursor-pointer transition-all duration-300 ease-in-out hover:rounded-s-[20px] hover:px-[20px] hover:pe-10">
+          <button className="cursor-pointer">All Updates</button>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -105,13 +109,13 @@ export function CartList() {
       </div>
 
       <div className="relative grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5">
-        {cartList.map((manga) => (
+        {mangaList.map((manga) => (
           <Cart
             key={manga.id}
             id={manga.id}
             title={manga.title}
             author={manga.author}
-            image={manga.image}
+            image={manga.coverImageUrl}
             chapter={manga.chapter}
             views={manga.views}
           />

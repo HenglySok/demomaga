@@ -1,1 +1,0 @@
-export const signUpAPI = "https://mangaapi-g1f2.onrender.com/api/v1/auth/register";
