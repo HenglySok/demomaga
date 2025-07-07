@@ -42,10 +42,10 @@ export const authApi = createApi({
       })
     }),
     getResetPassword: build.mutation({
-      query: ({ newPassword, verificationCode }) => ({
+      query: ({ password, verificationCode }) => ({
         url: "password/reset",
         method: "POST",
-        body: { newPassword, verificationCode }
+        body: { password, verificationCode }
       })
     })
   })

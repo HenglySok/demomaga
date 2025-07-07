@@ -47,7 +47,7 @@ export default function ForgotPassworld() {
                     disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isLoading ?
-                        "Submit" : "Submit..."
+                        "Submit..." : "Submit"
                     }
                 </button>
             </form>
