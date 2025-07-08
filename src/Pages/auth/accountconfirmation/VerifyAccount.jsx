@@ -75,7 +75,7 @@ function VerifyAccount() {
                 !errorTokenExpired ?
                     <div className="flex gap-3 flex-col items-center justify-center min-h-screen bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover">
                         <div className="max-w-md mx-auto p-6 border rounded shadow flex flex-col items-center justify-center bg-linear-to-t black to-[#00000050] text-text-75">
-                            <h3 className="text-2xl text-text-100 font-bold">
+                            <h3 className="text-2xl font-semibold cursor-default">
                                 Account confirmation
                             </h3>
                             <p className="text-center mb-4">To confirm your account, please follow the button below.</p>

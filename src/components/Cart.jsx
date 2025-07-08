@@ -1,6 +1,6 @@
 // Cart.jsx
 // import cartList from "../mockdata/cartList";
-import { useEffect } from "react";
+import SkeletonCard from "./SkeletonCard";
 import { useGetMangaQuery } from "../redux/services/mangaSlice";
 
 
@@ -82,11 +82,18 @@ function Cart({ id, title, author, image, chapter, views }) {
 
 export function CartList() {
   const { data, isLoading, isError, error } = useGetMangaQuery();
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  // Process data only when available
   const mangaList = data?.mangas || data?.data || data || [];
 
-  if (isLoading) return <div className="text-white p-10">Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5 py-10">
+        {arr.map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
+      </div>
+    );
   if (isError) return <div className="text-red-500 p-10">Error: {error.message}</div>;
 
   return (

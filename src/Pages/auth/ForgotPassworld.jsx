@@ -29,7 +29,7 @@ export default function ForgotPassworld() {
             <form
                 className="p-8 rounded shadow-md w-full max-w-sm space-y-4 bg-[#00000050] text-text-75 flex flex-col"
             >
-                <h2 className='font-bold'>Forgot Password</h2>
+                <h2 className='text-2xl font-semibold cursor-default'>Forgot Password</h2>
                 <p>please click button submit to reset password</p>
                 <input
                     className='border border-text-75 p-2 rounded-[5px]'
