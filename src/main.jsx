@@ -13,6 +13,7 @@ import MessageConfirm from './Pages/auth/accountconfirmation/MessageConfirm.jsx'
 import VerifyAccount from "./Pages/auth/accountconfirmation/VerifyAccount.jsx";
 import ForgotPassworld from "./Pages/auth/ForgotPassworld.jsx";
 import ResetPassword from "./Pages/auth/ResetPassword.jsx";
+import Admin from "./Pages/admin/Admin.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -29,6 +30,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="/" element={<RootLayout />}>
             <Route index element={<App />} />
+            <Route path="/admin" element={<Admin/>} />
             <Route path="feature" element={<Feature />} />
           </Route>
         </Routes>
