@@ -1,16 +1,48 @@
-export default function MangaRow({ author, imageFile, description }) {
+import { MdOutlineDelete } from "react-icons/md";
+
+export default function MangaRow({
+    id,
+    author,
+    imageFile,
+    description,
+    isHighlighted,
+    onClick,
+}) {
+    const handleDeleteManga = (e) => {
+        e.stopPropagation();
+        console.log(`delete manga ${id}`);
+    };
+
     return (
-        <div className="grid grid-cols-4 gap-4 items-center text-sm text-text-100 bg-black px-5 py-3 rounded-md w-[700px]">
+        <div
+            onClick={onClick}
+            className={`grid grid-cols-[80px_1fr_auto] items-center gap-4
+                 text-sm text-text-100 
+                 ${isHighlighted ? "bg-primary-75" : "bg-[#00000060]"}
+                 px-5 py-3 rounded-md w-full hover:bg-primary-50 
+                 transition-all duration-200 cursor-pointer`}
+        >
+            {/* Image */}
             <img
-                className="w-[70px] h-[70px] border rounded-[2px] object-cover"
+                className="w-[70px] h-[77px] border rounded-[2px] object-cover"
                 src={imageFile}
-                alt="mangaCover"
+                alt="manga cover"
             />
-            <p className="truncate">{author}</p>
-            <p className="truncate">{description}</p>
-            <button className="bg-primary-100 text-text-100 px-3 py-1 rounded-[5px] w-fit justify-self-end">
-                Delete
+
+            {/* Text Content */}
+            <div className="flex flex-col gap-2 overflow-hidden">
+                <p className="truncate text-[14px] font-medium">{author}</p>
+                <p className="truncate text-[12px] text-text-75 font-light">{description}</p>
+            </div>
+
+            {/* Delete Button */}
+            <button
+                onClick={handleDeleteManga}
+                className="bg-primary-100 hover:bg-primary-200 text-text-100 p-2 rounded-[5px] transition-all"
+                title="Delete manga"
+            >
+                <MdOutlineDelete size={20} />
             </button>
         </div>
-    )
+    );
 }
