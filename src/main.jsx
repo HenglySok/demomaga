@@ -14,7 +14,7 @@ import VerifyAccount from "./Pages/auth/accountconfirmation/VerifyAccount.jsx";
 import ForgotPassworld from "./Pages/auth/ForgotPassworld.jsx";
 import ResetPassword from "./Pages/auth/ResetPassword.jsx";
 import Admin from "./Pages/admin/Admin.jsx";
-import TableManga from "./components/adminComponent/tableManga.jsx";
+import TableManga from "./components/adminComponent/MangaList/TableManga.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -30,9 +30,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="message_comfirm" element={<MessageConfirm />} />
           <Route path="forgot-password" element={<ForgotPassworld />} />
           <Route path="reset-password" element={<ResetPassword />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<RootLayout />}>
             <Route index element={<App />} />
-            <Route path="/admin" element={<Admin />} />
+
             <Route path="feature" element={<Feature />} />
           </Route>
         </Routes>
