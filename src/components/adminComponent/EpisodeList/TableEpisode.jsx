@@ -1,4 +1,6 @@
+import { useEffect } from "react"
 import EpisodeRow from "./EpisodeRow"
+import { useGetEpisodeByIDQuery } from "../../../redux/services/episodeSlice"
 
 
 export const EpisodeList = [
@@ -37,6 +39,12 @@ export const EpisodeList = [
 
 
 function TableEpisode({ selectedManga }) {
+    // const { data, isLoading, isError } = useGetEpisodeByIDQuery(selectedManga?._id, {
+    //     skip: !selectedManga?._id, // avoid error on first render
+    // });
+    // console.log("data on eouside " + data);
+    // console.log("on componet table episode: " + selectedManga);
+    //const { data } = useGetEpisodeByIDQuery("686bedb2e9c9045bce757064");
     if (selectedManga == null) {
         return "Login..."
     }

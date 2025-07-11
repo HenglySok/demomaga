@@ -1,20 +1,15 @@
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const episodeApi = createApi({
-    reducerPath: 'mangaApi',
+    reducerPath: 'episodeApi', // ✅ Good: Unique name for this slice
     baseQuery: fetchBaseQuery({
-        baseUrl: import.meta.env.VITE_VIEW_BASE_API
+        baseUrl: import.meta.env.VITE_VIEW_BASE_API, // ✅ Must be defined in your .env file
     }),
     endpoints: (builder) => ({
-        getEpisodebyID: builder.mutation({
-            query: ({ id }) => ({
-                url: `/episode/manga/${id}`,
-                method: "POST",
-                body: { id },
-            }),
-        })
+        getEpisodeByID: builder.query({
+            query: (id) => `episode/manga/${id}`, // ✅ Assumes this is a GET request
+        }),
     }),
 });
 
-const { useGetEpisodebyIDMutation } = episodeApi
+export const { useGetEpisodeByIDQuery } = episodeApi;

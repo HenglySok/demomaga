@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetMangaQuery } from "../../../redux/services/mangaSlice";
 import MangaRow from "./MangaRow";
 
@@ -8,9 +8,18 @@ const TableManga = ({ onMangaSelect, selectedMangaId }) => {
 
     const mangalist = data?.mangas || data?.data || data || [];
 
+    // 🟩 Select first manga when data is loaded
+    useEffect(() => {
+        if (mangalist.length > 0 && !lastClickedId) {
+            const first = mangalist[0];
+            setLastClickedId(first._id);
+            onMangaSelect(first);
+        }
+    }, [mangalist, lastClickedId, onMangaSelect]);
+
     const handleRowClick = (manga) => {
-        setLastClickedId(prevId => prevId === manga.id ? null : manga._id);
-        onMangaSelect(prev => prev?._id === manga._id ? null : manga);
+        setLastClickedId(prevId => (prevId === manga._id ? null : manga._id));
+        onMangaSelect(prev => (prev?._id === manga._id ? null : manga));
     };
 
     if (isLoading) return <div className="text-7xl">Loading...</div>;
@@ -18,14 +27,8 @@ const TableManga = ({ onMangaSelect, selectedMangaId }) => {
 
     return (
         <div className="flex flex-col gap-[16px] p-5 pt-30">
-            <h3
-                className="text-text-100 text-[20px] "
-            >
-                Manga List
-            </h3>
-            <button
-                className="w-fit px-3 py-1 bg-secondary-100 rounded-[5px] text-[14px]"
-            >
+            <h3 className="text-text-100 text-[20px]">Manga List</h3>
+            <button className="w-fit px-3 py-1 bg-secondary-100 rounded-[5px] text-[14px]">
                 Add Manga
             </button>
             <div className="flex flex-col gap-2 ms-[5px]">
