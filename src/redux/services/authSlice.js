@@ -12,6 +12,14 @@ export const authApi = createApi({
         method: "POST",
         body: { email, password },
       }),
+      transformResponse: (response) => {
+        // Store tokens on successful login
+        if (response.data?.accessToken && response.data?.refreshToken) {
+          localStorage.setItem('accessToken', response.data.accessToken);
+          localStorage.setItem('refreshToken', response.data.refreshToken);
+        }
+        return response;
+      },
     }),
     getRegister: build.mutation({
       query: ({ firstName, lastName, email, password, confirmPassword }) => ({
@@ -24,7 +32,7 @@ export const authApi = createApi({
       query: ({ code }) => ({
         url: "verify/email",
         method: "POST",
-        body: { code }, // 
+        body: { code },
       }),
     }),
     getResendVerification: build.mutation({
@@ -47,7 +55,36 @@ export const authApi = createApi({
         method: "POST",
         body: { password, verificationCode }
       })
-    })
+    }),
+    // Added refresh token endpoint while maintaining naming convention
+    getRefreshToken: build.mutation({
+      query: (refreshToken) => ({
+        url: "/auth/refresh",
+        method: "POST",
+        body: { refreshToken },
+      }),
+      transformResponse: (response) => {
+        // Store new tokens on successful refresh
+        if (response.data?.accessToken && response.data?.refreshToken) {
+          localStorage.setItem('accessToken', response.data.accessToken);
+          localStorage.setItem('refreshToken', response.data.refreshToken);
+        }
+        return response;
+      },
+    }),
+    // Added logout endpoint while maintaining naming convention
+    getLogout: build.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+      transformResponse: (response) => {
+        // Clear tokens on logout
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        return response;
+      },
+    }),
   })
 });
 
@@ -58,4 +95,6 @@ export const {
   useGetResendVerificationMutation,
   useGetFogotPasswordMutation,
   useGetResetPasswordMutation,
+  useGetRefreshTokenMutation,
+  useGetLogoutMutation,
 } = authApi;
