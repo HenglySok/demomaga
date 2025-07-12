@@ -1,91 +1,96 @@
-import { useEffect } from "react"
-import EpisodeRow from "./EpisodeRow"
-import { useGetEpisodeByIDQuery } from "../../../redux/services/episodeSlice"
+import { useState } from "react";
+import { useGetEpisodesByMangaIdQuery } from "../../../redux/services/episodeSlice";
+import CreateEpisode from "./CreateEpisode";
+import EpisodeRow from "./EpisodeRow";
+import LoadingSpinner from "../../common/LoadingSpinner";
+import ErrorMessage from "../../common/ErrorMessage";
 
+export default function TableEpisode({ selectedManga }) {
+    const [showModal, setShowModal] = useState(false);
 
-export const EpisodeList = [
-    {
-        id: 1,
-        title: "Episode 1",
-        imageFile: "",
-    },
-    {
-        id: 2,
-        title: "Episode 2",
-        imageFile: "",
-    },
-    {
-        id: 3,
-        title: "Episode 3",
-        imageFile: "",
-    },
-    {
-        id: 4,
-        title: "Episode 4",
-        imageFile: "",
-    },
-    {
-        id: 5,
-        title: "Episode 5",
-        imageFile: "",
-    },
-    {
-        id: 6,
-        title: "Episode 6",
-        imageFile: "",
-    },
-]
+    // Fetch episodes using the actual API
+    const {
+        data: apiResponse,
+        isLoading,
+        isError,
+        error,
+        refetch
+    } = useGetEpisodesByMangaIdQuery(selectedManga?._id, {
+        skip: !selectedManga?._id
+    });
 
+    // Extract episodes from API response
+    const episodes = apiResponse?.episodes || [];
 
-
-function TableEpisode({ selectedManga }) {
-    // const { data, isLoading, isError } = useGetEpisodeByIDQuery(selectedManga?._id, {
-    //     skip: !selectedManga?._id, // avoid error on first render
-    // });
-    // console.log("data on eouside " + data);
-    // console.log("on componet table episode: " + selectedManga);
-    //const { data } = useGetEpisodeByIDQuery("686bedb2e9c9045bce757064");
-    if (selectedManga == null) {
-        return "Login..."
+    if (!selectedManga) {
+        return <div className="text-text-75 p-4">Please select a manga</div>;
     }
+
     return (
-        <div
-            className="flex flex-col gap-[16px]"
-        >
-            <div className="flex justify-between items-end gap-[16px]
-            bg-primary-75 p-5 text-text-75"
-            >
+        <div className="flex flex-col gap-[16px] relative">
+            {/* Header Section - unchanged */}
+            <div className="flex justify-between items-end gap-[16px] bg-primary-75 p-5 text-text-75">
                 <span className="flex gap-[16px]">
-                    <img src={selectedManga.coverImageUrl || ""}
+                    <img
+                        src={selectedManga.coverImageUrl || ""}
                         alt=""
-                        className="w-[130px] h-[130px]"
+                        className="w-[130px] h-[130px] object-cover"
+                        onError={(e) => e.target.src = '/default-manga-cover.jpg'}
                     />
                     <span className="flex flex-col gap-2 justify-end">
                         <h6 className="text-[14px] font-light text-text-50">Episode</h6>
-                        <h4 className="text-[18px] font-bold">{selectedManga.author || "Manga title"} </h4>
+                        <h4 className="text-[18px] font-bold">{selectedManga.author || "Manga title"}</h4>
                         <p className="text-[12px] font-light">{selectedManga.description || "apple banana lorem"}</p>
                     </span>
                 </span>
                 <button
-                    className='w-fit px-3 py-1 bg-secondary-75 rounded-[5px]'
+                    onClick={() => setShowModal(true)}
+                    className="w-fit px-3 py-1 bg-secondary-75 rounded-[5px] hover:bg-secondary-100 transition-colors"
                 >
                     Add Episode
                 </button>
             </div>
-            <h3 className="text-text-75 text-[22px] mt-5">Episode List</h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[16px]">
-                {
-                    EpisodeList.map((episode) => (
-                        < EpisodeRow
-                            key={episode.id}
-                            title={episode.title}
-                            imageFile={episode.imageFile}
-                        />
-                    ))
-                }
-            </div>
-        </div>
-    )
-}
 
-export default TableEpisode
+            {/* Episode List Section */}
+            <h3 className="text-text-75 text-[22px] mt-5">Episode List</h3>
+
+            {isLoading ? (
+                <div className="flex justify-center p-8">
+                    <LoadingSpinner size="md" />
+                </div>
+            ) : isError ? (
+                <ErrorMessage
+                    message={error?.data?.message || 'Failed to load episodes'}
+                    onRetry={refetch}
+                />
+            ) : episodes.length === 0 ? (
+                <div className="text-text-75 text-center p-8">No episodes found</div>
+            ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-[16px]">
+                    {episodes.map((episode) => (
+                        <EpisodeRow
+                            key={episode._id}
+                            id={episode._id}
+                            title={episode.title}
+                            chapter={episode.chapter}
+                            imageFile={episode.coverImageUrl}
+                            createdAt={episode.createdAt}
+                            onDeleteSuccess={refetch}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Create Episode Modal */}
+            {showModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <CreateEpisode
+                        mangaId={selectedManga._id}
+                        onClose={() => setShowModal(false)}
+                        onSuccess={refetch}
+                    />
+                </div>
+            )}
+        </div>
+    );
+}

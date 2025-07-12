@@ -56,7 +56,7 @@ export default function SignIn() {
         const response = await getLogin(values).unwrap();
 
         if (response?.data) {
-          localStorage.setItem("accesstoken", response.data.tokens.accessToken);
+          localStorage.setItem("accessToken", response.data.tokens.accessToken);
           localStorage.setItem("refreshToken", response.data.tokens.refreshToken);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           setUserOfData(response.data.user);

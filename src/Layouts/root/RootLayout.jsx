@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
-import NavBarWithOutLogin from "../NavBar/NavBar";
-import { useGetLoginMutation } from "../../redux/services/authSlice";
 
 function RootLayout() {
   // const [hasToken, setHasToken] = useState(false);

@@ -1,4 +1,5 @@
-import { MdOutlineDelete } from "react-icons/md";
+import { MdOutlineDelete, MdClose } from "react-icons/md";
+import { useState } from "react";
 import { useDeleteMangaMutation } from "../../../redux/services/mangaSlice";
 
 export default function MangaRow({
@@ -8,23 +9,30 @@ export default function MangaRow({
     description,
     isHighlighted,
     onClick,
-    onDeleteSuccess, // Add this prop to handle post-deletion
+    onDeleteSuccess,
 }) {
     const [deleteManga, { isLoading }] = useDeleteMangaMutation();
+    const [showConfirm, setShowConfirm] = useState(false);
 
-    const handleDeleteManga = async (e) => {
+    const handleDeleteClick = (e) => {
         e.stopPropagation();
+        setShowConfirm(true);
+    };
 
-        if (window.confirm("Are you sure you want to delete this manga?")) {
-            try {
-                await deleteManga(id).unwrap();
-                alert("Manga deleted successfully!");
-                onDeleteSuccess?.(); // Call this after successful deletion
-            } catch (error) {
-                console.error("Failed to delete manga:", error);
-                alert("Failed to delete manga. Please try again.");
-            }
+    const handleConfirmDelete = async () => {
+        try {
+            await deleteManga(id).unwrap();
+            onDeleteSuccess?.();
+        } catch (error) {
+            console.error("Failed to delete manga:", error);
+        } finally {
+            setShowConfirm(false);
         }
+    };
+
+    const handleCancelDelete = (e) => {
+        e.stopPropagation();
+        setShowConfirm(false);
     };
 
     return (
@@ -41,6 +49,9 @@ export default function MangaRow({
                 className="w-[70px] h-[77px] border rounded-[2px] object-cover"
                 src={imageFile}
                 alt="manga cover"
+                onError={(e) => {
+                    e.target.src = '/default-manga-cover.jpg';
+                }}
             />
 
             {/* Text Content */}
@@ -50,14 +61,37 @@ export default function MangaRow({
             </div>
 
             {/* Delete Button */}
-            <button
-                onClick={handleDeleteManga}
-                className="bg-primary-100 hover:bg-primary-200 text-text-100 p-2 rounded-[5px] transition-all"
-                title="Delete manga"
-                disabled={isLoading}
-            >
-                {isLoading ? "Deleting..." : <MdOutlineDelete size={20} />}
-            </button>
+            <div className="flex gap-2">
+                {showConfirm ? (
+                    <>
+                        <button
+                            onClick={handleConfirmDelete}
+                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-[5px] text-sm transition-colors flex items-center gap-1"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? (
+                                <span className="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+                            ) : null}
+                            Delete
+                        </button>
+                        <button
+                            onClick={handleCancelDelete}
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded-[5px] text-sm transition-colors flex items-center gap-1"
+                        >
+                            <MdClose size={16} />
+                            Cancel
+                        </button>
+                    </>
+                ) : (
+                    <button
+                        onClick={handleDeleteClick}
+                        className="bg-primary-100 hover:bg-primary-200 text-text-100 p-2 rounded-[5px] transition-all"
+                        title="Delete manga"
+                    >
+                        <MdOutlineDelete size={20} />
+                    </button>
+                )}
+            </div>
         </div>
     );
 }

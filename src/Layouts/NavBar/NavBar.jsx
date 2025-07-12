@@ -13,14 +13,14 @@ const NavBar = () => {
 
   // Check auth status on mount and when storage changes
   useEffect(() => {
-    const token = localStorage.getItem("accesstoken");
+    const token = localStorage.getItem("accessToken");
     const userData = localStorage.getItem("user");
 
     setIsAuthenticated(!!token);
     setUser(userData ? JSON.parse(userData) : null);
 
     const handleStorageChange = () => {
-      const token = localStorage.getItem("accesstoken");
+      const token = localStorage.getItem("accessToken");
       const userData = localStorage.getItem("user");
       setIsAuthenticated(!!token);
       setUser(userData ? JSON.parse(userData) : null);
@@ -32,7 +32,7 @@ const NavBar = () => {
 
   const handleAuthAction = () => {
     if (isAuthenticated) {
-      localStorage.removeItem("accesstoken");
+      localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
       localStorage.removeItem("email");

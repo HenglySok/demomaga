@@ -15,6 +15,7 @@ import ForgotPassworld from "./Pages/auth/ForgotPassworld.jsx";
 import ResetPassword from "./Pages/auth/ResetPassword.jsx";
 import Admin from "./Pages/admin/Admin.jsx";
 import AddManga from "./components/adminComponent/MangaList/AddManga.jsx";
+import GetEpisode from "./components/adminComponent/EpisodeList/GetEpisode.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,15 +24,17 @@ createRoot(document.getElementById("root")).render(
       {/* Add store prop */}
       <BrowserRouter>
         <Routes>
-          <Route path="/add_manga" element={<AddManga />} />
+          <Route path="episode" element={<GetEpisode />} />
+          <Route path="add_manga" element={<AddManga />} />
           <Route path="sign_in" element={<SignIn />} />
           <Route path="sign_up" element={<SignUp />} />
           <Route path="confirm-account" element={<VerifyAccount />} />
           <Route path="message_comfirm" element={<MessageConfirm />} />
           <Route path="forgot-password" element={<ForgotPassworld />} />
           <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="/admin" element={<Admin />} />
+
           <Route path="/" element={<RootLayout />}>
+            <Route path="/admin" element={<Admin />} />
             <Route index element={<App />} />
             <Route path="feature" element={<Feature />} />
           </Route>

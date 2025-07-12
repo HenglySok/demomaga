@@ -5,7 +5,7 @@ export const mangaApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_VIEW_BASE_API,
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('accesstoken'); // or sessionStorage
+      const token = localStorage.getItem('accessToken'); // or sessionStorage
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
