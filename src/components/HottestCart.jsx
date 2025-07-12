@@ -38,7 +38,7 @@ function HottestCart({ title, author, image, rateing }) {
 
 
 export function HottestCartList() {
-    const [isOn, setIsOn] = useState(true);
+    const [isOn, setIsOn] = useState(false);
 
     return (
         <div className="flex z-30">

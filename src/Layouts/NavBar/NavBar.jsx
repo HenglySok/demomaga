@@ -69,7 +69,7 @@ const NavBar = () => {
   }, [isDropdownOpen]);
 
   return (
-    <nav className="flex items-center justify-between shadow-md relative w-full h-fit z-50 bg-white/10 backdrop-blur-sm">
+    <nav className="flex items-center justify-between shadow-md relative w-full z-50 bg-black h-full">
       {/* Mobile menu button */}
       <button
         onClick={toggleMobileMenu}
@@ -171,7 +171,7 @@ const NavBar = () => {
         onClick={toggleMobileMenu}
       >
         <div
-          className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-primary-100 shadow-lg transform transition-transform duration-300 ${isMenuMobileOpen ? "translate-x-0" : "-translate-x-full"
+          className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-primary-100 shadow-lg transform transition-transform duration-300 ${isMenuMobileOpen ? "translate-x-0 overflow-auto" : "-translate-x-full"
             }`}
           onClick={(e) => e.stopPropagation()}
         >
