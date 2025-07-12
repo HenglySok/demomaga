@@ -18,12 +18,18 @@ export const mangaApi = createApi({
     }),
     addManga: builder.mutation({
       query: (formData) => ({
-        url: "/admin/manga",
+        url: '/admin/manga',
         method: "POST",
         body: formData,
+      }),
+    }),
+    deleteManga: builder.mutation({
+      query: (id) => ({
+        url: `/admin/manga/${id}`,
+        method: "DELETE",
       }),
     }),
   }),
 });
 
-export const { useGetMangaQuery, useAddMangaMutation } = mangaApi;
+export const { useGetMangaQuery, useAddMangaMutation, useDeleteMangaMutation } = mangaApi;

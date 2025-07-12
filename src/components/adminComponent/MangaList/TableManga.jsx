@@ -3,7 +3,7 @@ import { useGetMangaQuery } from "../../../redux/services/mangaSlice";
 import MangaRow from "./MangaRow";
 
 const TableManga = ({ onMangaSelect, selectedMangaId }) => {
-    const { data, isLoading, isError, error } = useGetMangaQuery();
+    const { data, isLoading, isError, error, refetch } = useGetMangaQuery();
     const [lastClickedId, setLastClickedId] = useState(null);
 
     const mangalist = data?.mangas || data?.data || data || [];
@@ -20,6 +20,15 @@ const TableManga = ({ onMangaSelect, selectedMangaId }) => {
     const handleRowClick = (manga) => {
         setLastClickedId(prevId => (prevId === manga._id ? null : manga._id));
         onMangaSelect(prev => (prev?._id === manga._id ? null : manga));
+    };
+
+    const handleDeleteSuccess = () => {
+        refetch(); // Refresh the manga list after deletion
+        if (lastClickedId === id) {
+            // If the deleted manga was the selected one, clear the selection
+            setLastClickedId(null);
+            onMangaSelect(null);
+        }
     };
 
     if (isLoading) return <div className="text-7xl">Loading...</div>;
@@ -41,6 +50,7 @@ const TableManga = ({ onMangaSelect, selectedMangaId }) => {
                         description={manga.description}
                         isHighlighted={lastClickedId === manga._id}
                         onClick={() => handleRowClick(manga)}
+                        onDeleteSuccess={handleDeleteSuccess}
                     />
                 ))}
             </div>

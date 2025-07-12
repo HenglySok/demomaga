@@ -1,4 +1,5 @@
 import { MdOutlineDelete } from "react-icons/md";
+import { useDeleteMangaMutation } from "../../../redux/services/mangaSlice";
 
 export default function MangaRow({
     id,
@@ -7,10 +8,23 @@ export default function MangaRow({
     description,
     isHighlighted,
     onClick,
+    onDeleteSuccess, // Add this prop to handle post-deletion
 }) {
-    const handleDeleteManga = (e) => {
+    const [deleteManga, { isLoading }] = useDeleteMangaMutation();
+
+    const handleDeleteManga = async (e) => {
         e.stopPropagation();
-        console.log(`delete manga ${id}`);
+
+        if (window.confirm("Are you sure you want to delete this manga?")) {
+            try {
+                await deleteManga(id).unwrap();
+                alert("Manga deleted successfully!");
+                onDeleteSuccess?.(); // Call this after successful deletion
+            } catch (error) {
+                console.error("Failed to delete manga:", error);
+                alert("Failed to delete manga. Please try again.");
+            }
+        }
     };
 
     return (
@@ -40,8 +54,9 @@ export default function MangaRow({
                 onClick={handleDeleteManga}
                 className="bg-primary-100 hover:bg-primary-200 text-text-100 p-2 rounded-[5px] transition-all"
                 title="Delete manga"
+                disabled={isLoading}
             >
-                <MdOutlineDelete size={20} />
+                {isLoading ? "Deleting..." : <MdOutlineDelete size={20} />}
             </button>
         </div>
     );

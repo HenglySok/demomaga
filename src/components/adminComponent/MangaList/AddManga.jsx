@@ -38,6 +38,7 @@ const AddManga = () => {
                 resetForm();
                 setImageFile(null);
                 setPreview(null);
+                onSuccess?.();
             } catch (err) {
                 console.error("Upload error:", err);
             }
