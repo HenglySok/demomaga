@@ -14,7 +14,7 @@ import VerifyAccount from "./Pages/auth/accountconfirmation/VerifyAccount.jsx";
 import ForgotPassworld from "./Pages/auth/ForgotPassworld.jsx";
 import ResetPassword from "./Pages/auth/ResetPassword.jsx";
 import Admin from "./Pages/admin/Admin.jsx";
-import TableManga from "./components/adminComponent/MangaList/TableManga.jsx";
+import AddManga from "./components/adminComponent/MangaList/AddManga.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,7 +23,7 @@ createRoot(document.getElementById("root")).render(
       {/* Add store prop */}
       <BrowserRouter>
         <Routes>
-          <Route path="table-manga" element={<TableManga />} />
+          <Route path="/add_manga" element={<AddManga />} />
           <Route path="sign_in" element={<SignIn />} />
           <Route path="sign_up" element={<SignUp />} />
           <Route path="confirm-account" element={<VerifyAccount />} />
@@ -33,7 +33,6 @@ createRoot(document.getElementById("root")).render(
           <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<RootLayout />}>
             <Route index element={<App />} />
-
             <Route path="feature" element={<Feature />} />
           </Route>
         </Routes>

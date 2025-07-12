@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { Banner } from '../components/Banner'
 import FeatureCard from "../components/Feature/FeatureCard";
 import { featurecard } from "../components/Feature/FeatureCard";
 
 export default function Feature() {
+  // const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <Banner />
+      {/* <Banner />
       <div className='max-w-screen-2xl mx-auto'>
         <div className="relative w-full bg-gray-900">
           <div className=" bg-black my-3 p-3">
@@ -43,7 +45,25 @@ export default function Feature() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
+      {/* <button
+        className='bg-secondary-100 px-2 py-1 rounded-[5px]'
+        onClick={() => setIsOpen(true)}
+      >
+        Open
+      </button>
+      <div className={`absolute ${isOpen ? "top-20 left-100" : "top-[-500px]"} bg-pink-500`}>
+        <h1>Hello everyone</h1>
+        <h1>Hello everyone</h1>
+        <h1>Hello everyone</h1>
+        <h1>Hello everyone</h1>
+        <button
+          className='bg-primary-100 px-2 py-1 rounded-[5px]'
+          onClick={() => setIsOpen(false)}
+        >
+          close
+        </button>
+      </div> */}
     </>
 
   );
