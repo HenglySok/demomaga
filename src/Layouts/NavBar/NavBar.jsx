@@ -3,12 +3,14 @@ import { bgList } from "./bgList";
 import Search from "./Search";
 import List from "./List";
 import { useNavigate } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCog } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 
 const NavBar = () => {
   const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   // Check auth status on mount and when storage changes
@@ -39,6 +41,7 @@ const NavBar = () => {
       localStorage.removeItem("verifyEmail");
       setIsAuthenticated(false);
       setUser(null);
+      setIsDropdownOpen(false);
       navigate("/");
     } else {
       navigate("/sign_in");
@@ -48,6 +51,22 @@ const NavBar = () => {
   const toggleMobileMenu = () => {
     setIsMenuMobileOpen(!isMenuMobileOpen);
   };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isDropdownOpen && !event.target.closest('.dropdown-container')) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isDropdownOpen]);
 
   return (
     <nav className="flex items-center justify-between shadow-md relative w-full h-fit z-50 bg-white/10 backdrop-blur-sm">
@@ -82,20 +101,58 @@ const NavBar = () => {
       <div className="hidden lg:flex items-center gap-4">
         <Search />
         {isAuthenticated ? (
-          <div className="flex items-center gap-4">
-            {user?.avatar && (
-              <img
-                src={user.avatar}
-                alt="User avatar"
-                className="w-8 h-8 rounded-full"
-              />
-            )}
-            <button
-              onClick={handleAuthAction}
-              className="py-3 px-6 rounded-full bg-red-500 hover:bg-red-600 text-white font-medium"
+          <div className="relative dropdown-container">
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={toggleDropdown}
             >
-              Logout
-            </button>
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt="User avatar"
+                  className="w-10 h-10 rounded-full border-2 border-white/50 hover:border-white/80 transition-all"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+                  <span className="text-gray-700 font-medium">
+                    {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Dropdown menu */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                <div className="px-4 py-2 border-b border-gray-100">
+                  <p className="text-sm font-medium text-gray-900">
+                    {user?.firstName} {user?.lastName}
+                  </p>
+                  <p className="text-xs text-gray-500">{user?.email}</p>
+                </div>
+
+                {user?.role === 'admin' && (
+                  <button
+                    onClick={() => {
+                      navigate("/admin");
+                      setIsDropdownOpen(false);
+                    }}
+                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <FaUserCog className="mr-2" />
+                    Admin Dashboard
+                  </button>
+                )}
+
+                <button
+                  onClick={handleAuthAction}
+                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  <FiLogOut className="mr-2" />
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <button
@@ -107,7 +164,7 @@ const NavBar = () => {
         )}
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu (keep existing mobile menu code) */}
       <div
         className={`fixed inset-0 bg-black/80 z-40 transition-opacity duration-300 lg:hidden ${isMenuMobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
@@ -135,18 +192,47 @@ const NavBar = () => {
             <div className="mt-auto pt-4 border-t border-white/20">
               <Search mobile />
               {isAuthenticated ? (
-                <div className="flex items-center gap-4 mt-4">
-                  {user?.avatar && (
-                    <img
-                      src={user.avatar}
-                      alt="User avatar"
-                      className="w-8 h-8 rounded-full"
-                    />
+                <div className="flex flex-col gap-4 mt-4">
+                  <div className="flex items-center gap-4">
+                    {user?.avatar ? (
+                      <img
+                        src={user.avatar}
+                        alt="User avatar"
+                        className="w-8 h-8 rounded-full"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                        <span className="text-gray-700 text-xs">
+                          {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-sm font-medium">
+                        {user?.firstName} {user?.lastName}
+                      </p>
+                      <p className="text-xs text-gray-300">{user?.email}</p>
+                    </div>
+                  </div>
+
+                  {user?.role === 'admin' && (
+                    <button
+                      onClick={() => {
+                        navigate("/admin");
+                        setIsMenuMobileOpen(false);
+                      }}
+                      className="w-full py-2 px-4 rounded-md bg-blue-500 text-white font-medium flex items-center gap-2"
+                    >
+                      <FaUserCog />
+                      Admin Dashboard
+                    </button>
                   )}
+
                   <button
                     onClick={handleAuthAction}
-                    className="w-full py-3 px-4 rounded-md bg-red-500 text-white font-medium"
+                    className="w-full py-2 px-4 rounded-md bg-red-500 text-white font-medium flex items-center gap-2"
                   >
+                    <FiLogOut />
                     Logout
                   </button>
                 </div>

@@ -82,7 +82,11 @@ export default function SignIn() {
   // Redirect if user is already logged in
   useEffect(() => {
     if (userOfData) {
-      navigate("/");
+      if (userOfData.role === 'admin') {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     }
   }, [userOfData, navigate]);
 

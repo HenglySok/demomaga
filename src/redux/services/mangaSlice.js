@@ -1,9 +1,17 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQueryWithReauth } from './baseQueryWithReauth';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const mangaApi = createApi({
   reducerPath: 'mangaApi',
-  baseQuery: baseQueryWithReauth,
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_VIEW_BASE_API,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem('accessToken'); // or sessionStorage
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     getManga: builder.query({
       query: () => 'manga',

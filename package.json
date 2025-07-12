@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
-    "async-mutex": "^0.5.0",
     "axios": "^1.10.0",
     "bootstrap-icons": "^1.13.1",
     "flowbite": "^3.1.2",
