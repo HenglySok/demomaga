@@ -2,14 +2,20 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useState } from "react";
 import { useDeleteEpisodeMutation } from "../../../redux/services/episodeSlice";
 
-const EpisodeRow = ({ id, title, imageFile, onDeleteSuccess }) => {
+const EpisodeRow = ({
+    id,
+    title,
+    imageFile,
+    onDeleteSuccess,
+    onAddContentClick, // <-- important prop
+}) => {
     const [deleteEpisode, { isLoading }] = useDeleteEpisodeMutation();
     const [showConfirm, setShowConfirm] = useState(false);
 
     const handleDelete = async () => {
         try {
             await deleteEpisode(id).unwrap();
-            onDeleteSuccess?.(); // Optional callback after successful deletion
+            onDeleteSuccess?.(); // callback to refetch
         } catch (error) {
             console.error("Failed to delete episode:", error);
             alert("Failed to delete episode");
@@ -33,12 +39,15 @@ const EpisodeRow = ({ id, title, imageFile, onDeleteSuccess }) => {
             </div>
 
             <div className="flex flex-col gap-3 items-end">
+                {/* Add Content Button (calls parent handler) */}
                 <button
+                    onClick={onAddContentClick} // <-- the fix!
                     className="w-fit px-3 py-1 bg-secondary-75 hover:bg-secondary-100 rounded-[5px] transition-colors text-sm"
                 >
                     Add Content
                 </button>
 
+                {/* Delete confirmation */}
                 {showConfirm ? (
                     <div className="flex gap-2">
                         <button

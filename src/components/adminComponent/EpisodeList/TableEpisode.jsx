@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useGetEpisodesByMangaIdQuery } from "../../../redux/services/episodeSlice";
 import CreateEpisode from "./CreateEpisode";
+import AddContent from "./../Content/AddContent";
 import EpisodeRow from "./EpisodeRow";
 import LoadingSpinner from "../../common/LoadingSpinner";
 import ErrorMessage from "../../common/ErrorMessage";
 
 export default function TableEpisode({ selectedManga }) {
     const [showModal, setShowModal] = useState(false);
+    const [showContentModal, setShowContentModal] = useState(false);
+    const [selectedEpisodeId, setSelectedEpisodeId] = useState(null);
 
-    // Fetch episodes using the actual API
     const {
         data: apiResponse,
         isLoading,
@@ -19,7 +21,6 @@ export default function TableEpisode({ selectedManga }) {
         skip: !selectedManga?._id
     });
 
-    // Extract episodes from API response
     const episodes = apiResponse?.episodes || [];
 
     if (!selectedManga) {
@@ -28,7 +29,6 @@ export default function TableEpisode({ selectedManga }) {
 
     return (
         <div className="flex flex-col gap-[16px] relative">
-            {/* Header Section - unchanged */}
             <div className="flex justify-between items-end gap-[16px] bg-primary-75 p-5 text-text-75">
                 <span className="flex gap-[16px]">
                     <img
@@ -51,7 +51,6 @@ export default function TableEpisode({ selectedManga }) {
                 </button>
             </div>
 
-            {/* Episode List Section */}
             <h3 className="text-text-75 text-[22px] mt-5">Episode List</h3>
 
             {isLoading ? (
@@ -76,17 +75,31 @@ export default function TableEpisode({ selectedManga }) {
                             imageFile={episode.coverImageUrl}
                             createdAt={episode.createdAt}
                             onDeleteSuccess={refetch}
+                            onAddContentClick={() => {
+                                setSelectedEpisodeId(episode._id);
+                                setShowContentModal(true);
+                            }}
                         />
                     ))}
                 </div>
             )}
 
-            {/* Create Episode Modal */}
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <CreateEpisode
                         mangaId={selectedManga._id}
                         onClose={() => setShowModal(false)}
+                        onSuccess={refetch}
+                    />
+                </div>
+            )}
+
+            {showContentModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <AddContent
+                        mangaId={selectedManga._id}
+                        episodeId={selectedEpisodeId}
+                        onClose={() => setShowContentModal(false)}
                         onSuccess={refetch}
                     />
                 </div>
