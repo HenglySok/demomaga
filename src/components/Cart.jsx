@@ -5,6 +5,7 @@ import { useGetMangaQuery } from "../redux/services/mangaSlice";
 
 
 function Cart({ id, title, author, image, chapter, views }) {
+
   {
     /*
         sm: 206 / 294

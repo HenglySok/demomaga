@@ -86,10 +86,10 @@ const NavBar = () => {
 
       {/* Logo */}
       <div
-        className="w-[100px] h-[100px] bg-primary-100 flex items-center justify-center cursor-pointer"
+        className="w-[100px] h-[100px] bg-primary-100 flex items-center justify-center cursor-pointer m-2 p-3 rounded-[50%]"
         onClick={() => navigate("/")}
       >
-        <span className="text-xl font-bold">Logo</span>
+        <span className="text-sm font-bold text-nowrap text-text-75">Demo Manga</span>
       </div>
 
       {/* Desktop menu */}

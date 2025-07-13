@@ -53,12 +53,12 @@ const AddManga = ({ onSuccess, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md relative">
+        <div className="fixed inset-0 bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover flex items-center justify-center z-50 p-4">
+            <div className="bg-[#00000050] rounded-lg shadow-xl w-full max-w-md relative">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white transition-colors"
+                    className="absolute top-2 right-2 text-text-75  transition-colors"
                     aria-label="Close form"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,11 +67,11 @@ const AddManga = ({ onSuccess, onClose }) => {
                 </button>
 
                 <form onSubmit={formik.handleSubmit} className="p-6 space-y-4">
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">Add New Manga</h2>
+                    <h2 className="text-xl font-bold text-primary-100 ">Add New Manga</h2>
 
                     {/* Image Upload */}
                     <div className="space-y-2">
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label className="block text-sm font-medium text-text-75">
                             Cover Image
                         </label>
                         <div className="flex items-center justify-center w-full">
@@ -80,7 +80,7 @@ const AddManga = ({ onSuccess, onClose }) => {
                                     <img src={preview} alt="Preview" className="w-full h-full object-cover rounded-lg" />
                                 ) : (
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg className="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg className="w-8 h-8 mb-3 text-text-75" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                         </svg>
                                         <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG (MAX. 5MB)</p>
@@ -98,7 +98,7 @@ const AddManga = ({ onSuccess, onClose }) => {
 
                     {/* Title Field */}
                     <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label htmlFor="title" className="block text-sm font-medium text-text-75">
                             Title
                         </label>
                         <input
@@ -108,7 +108,7 @@ const AddManga = ({ onSuccess, onClose }) => {
                             placeholder="Manga title"
                             onChange={formik.handleChange}
                             value={formik.values.title}
-                            className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                            className="mt-1 block text-text-75 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700  shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
                         />
                         {formik.touched.title && formik.errors.title && (
                             <p className="mt-1 text-sm text-red-600">{formik.errors.title}</p>
@@ -117,7 +117,7 @@ const AddManga = ({ onSuccess, onClose }) => {
 
                     {/* Author Field */}
                     <div>
-                        <label htmlFor="author" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label htmlFor="author" className="block text-sm font-medium text-text-75">
                             Author
                         </label>
                         <input
@@ -127,7 +127,7 @@ const AddManga = ({ onSuccess, onClose }) => {
                             placeholder="Author name"
                             onChange={formik.handleChange}
                             value={formik.values.author}
-                            className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                            className="mt-1 block w-full rounded-md text-text-75 border-gray-300 dark:border-gray-600 dark:bg-gray-700  shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
                         />
                         {formik.touched.author && formik.errors.author && (
                             <p className="mt-1 text-sm text-red-600">{formik.errors.author}</p>
@@ -136,7 +136,7 @@ const AddManga = ({ onSuccess, onClose }) => {
 
                     {/* Description Field */}
                     <div>
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label htmlFor="description" className="block text-sm font-medium text-text-75">
                             Description
                         </label>
                         <textarea
@@ -146,7 +146,7 @@ const AddManga = ({ onSuccess, onClose }) => {
                             placeholder="Manga description"
                             onChange={formik.handleChange}
                             value={formik.values.description}
-                            className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                            className="mt-1 block w-full rounded-md text-text-75 border-gray-300 dark:border-gray-600 dark:bg-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
                         />
                         {formik.touched.description && formik.errors.description && (
                             <p className="mt-1 text-sm text-red-600">{formik.errors.description}</p>
@@ -157,7 +157,7 @@ const AddManga = ({ onSuccess, onClose }) => {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-primary-100 text-white py-2 px-4 rounded-md hover:bg-primary-75 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
                             <>

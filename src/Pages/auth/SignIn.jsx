@@ -5,19 +5,19 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import * as Yup from "yup";
-import { FaCheckCircle } from "react-icons/fa";
+
 
 
 export default function SignIn() {
   const [getLogin, { isLoading }] = useGetLoginMutation();
   const [userOfData, setUserOfData] = useState(null);
   const navigate = useNavigate();
-  const [isVerifySuccess, setIsVerifySuccess] = useState(false);
+
 
   useEffect(() => {
     const VerifySuccess = localStorage.getItem("isVerifySuccess");
     if (VerifySuccess === "true") {
-      setIsVerifySuccess(true)
+
       toast.success("Account verified successfully!");
       localStorage.removeItem("isVerifySuccess");
 
@@ -185,15 +185,6 @@ export default function SignIn() {
           </button>
         </div>
       </form>
-      {isVerifySuccess &&
-        <h3 className="flex absolute bg-white
-   justify-center items-center gap-2
-  rounded-[5px] bottom-25 right-70 px-4 py-1">
-          <FaCheckCircle color="#228B22" />
-          Email is Verified
-        </h3>
-      }
-
     </div>
   );
 }

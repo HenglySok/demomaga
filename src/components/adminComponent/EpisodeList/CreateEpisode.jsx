@@ -65,18 +65,18 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-[url(src/assets/img/bg-image/backgroup.png)] bg-center bg-cover 0 flex items-center justify-center z-50 p-4">
             <form
                 onSubmit={formik.handleSubmit}
-                className="bg-white rounded-lg shadow-xl w-full max-w-md"
+                className="bg-[#00000050] rounded-lg shadow-xl w-full max-w-md"
             >
                 <div className="p-6">
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-xl font-bold text-gray-800">Create Episode</h2>
+                        <h2 className="text-xl font-bold text-primary-100">Create Episode</h2>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="text-gray-500 hover:text-gray-700"
+                            className="text-text-75"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
 
                     {/* Image Upload */}
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-text-75 mb-1">
                             Episode Cover Image
                         </label>
                         <div className="flex items-center justify-center w-full">
@@ -141,7 +141,7 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
 
                     {/* Chapter Input */}
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-text-75 mb-1">
                             Chapter Number
                         </label>
                         <input
@@ -150,7 +150,7 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
                             placeholder="e.g., 1, 2, 3..."
                             onChange={formik.handleChange}
                             value={formik.values.chapter}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full text-text-75 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         {formik.touched.chapter && formik.errors.chapter && (
                             <p className="mt-1 text-sm text-red-600">
@@ -161,7 +161,7 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
 
                     {/* Title Input */}
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-text-75 mb-1">
                             Episode Title
                         </label>
                         <input
@@ -170,7 +170,7 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
                             placeholder="e.g., The Beginning"
                             onChange={formik.handleChange}
                             value={formik.values.title}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full text-text-75 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         {formik.touched.title && formik.errors.title && (
                             <p className="mt-1 text-sm text-red-600">
@@ -188,7 +188,7 @@ export default function CreateEpisode({ mangaId, onClose, onSuccess }) {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-primary-100 text-white py-2 px-4 rounded-md hover:bg-primary-75 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
                             <>

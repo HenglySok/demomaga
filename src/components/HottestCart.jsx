@@ -68,7 +68,7 @@ export function HottestCartList() {
                 {/*Logo banner */}
                 <div className="hidden md:flex relative justify-center items-center rounded-[10px]">
                     <img src={bg_manag} alt="manga pic" className="rounded-t-[10px]" />
-                    <span className="bg-primary-100 px-20 py-3 absolute text-text-100 text-[32px]">Logo</span>
+                    <span className="bg-primary-100 px-20 py-3 absolute text-text-100 text-[32px]">Demo Manga</span>
                 </div>
 
                 {/*black space*/}
