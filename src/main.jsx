@@ -17,6 +17,7 @@ import Admin from "./Pages/admin/Admin.jsx";
 import AddManga from "./components/adminComponent/MangaList/AddManga.jsx";
 import GetEpisode from "./components/adminComponent/EpisodeList/GetEpisode.jsx";
 import AddContent from "./components/adminComponent/Content/AddContent.jsx";
+import Episode from "./Pages/user/Episode.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -26,7 +27,6 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Routes>
           <Route path="add-content" element={<AddContent />} />
-          <Route path="episode" element={<GetEpisode />} />
           <Route path="add_manga" element={<AddManga />} />
           <Route path="sign_in" element={<SignIn />} />
           <Route path="sign_up" element={<SignUp />} />
@@ -37,6 +37,7 @@ createRoot(document.getElementById("root")).render(
 
           <Route path="/" element={<RootLayout />}>
             <Route path="/admin" element={<Admin />} />
+            <Route path="episode" element={<Episode />} />
             <Route index element={<App />} />
             <Route path="feature" element={<Feature />} />
           </Route>

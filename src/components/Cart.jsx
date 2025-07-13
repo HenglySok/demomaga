@@ -1,21 +1,18 @@
 // Cart.jsx
-// import cartList from "../mockdata/cartList";
 import SkeletonCard from "./SkeletonCard";
+import { useNavigate } from "react-router";
 import { useGetMangaQuery } from "../redux/services/mangaSlice";
 
-
 function Cart({ id, title, author, image, chapter, views }) {
+  const navigate = useNavigate();
 
-  {
-    /*
-        sm: 206 / 294
-        md: 152 / 217
-        lg: 153 / 230
-        xxl: 188 / 275
-        */
-  }
+  const handleClick = () => {
+    navigate(`/episode?manga=${id}`);
+  };
+
   return (
     <article
+      onClick={handleClick}
       className="relative w-[147px] h-[210px] sm:w-[206px] sm:h-[294px]
       md:w-[152px] md:h-[217px] lg:w-[153px] lg:h-[230px] xl:w-[188px]
       xl:h-[275px] mx-auto rounded-b-xl overflow-hidden cursor-pointer"
@@ -54,7 +51,7 @@ function Cart({ id, title, author, image, chapter, views }) {
             border-t-1 transition-all duration-300 ease-in-out
             hover:bg-gradient-to-b from-black to-primary-75 hover:border-primary-75"
           >
-            <div className="px-[5px] pb-[30px]  ">
+            <div className="px-[5px] pb-[30px]">
               <div className="flex justify-between items-center">
                 <h3 className="text-text-100 text-[18px] font-bold">#{id}</h3>
                 <div className="flex items-center justify-between text-text-50 text-[14px] gap-4">
@@ -95,7 +92,9 @@ export function CartList() {
         ))}
       </div>
     );
-  if (isError) return <div className="text-red-500 p-10">Error: {error.message}</div>;
+
+  if (isError)
+    return <div className="text-red-500 p-10">Error: {error.message}</div>;
 
   return (
     <div className="bg-gradient-to-b from-[#000000] to-[#252424] to-80% w-full md:w-fit h-fit mx-auto rounded-[10px]">
@@ -119,8 +118,8 @@ export function CartList() {
       <div className="relative grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5">
         {mangaList.map((manga) => (
           <Cart
-            key={manga.id}
-            id={manga.id}
+            key={manga._id}
+            id={manga._id}
             title={manga.title}
             author={manga.author}
             image={manga.coverImageUrl}
